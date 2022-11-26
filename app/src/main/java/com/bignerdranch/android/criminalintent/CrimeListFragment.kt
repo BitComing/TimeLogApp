@@ -183,6 +183,7 @@ class CrimeListFragment : Fragment() {
         }
 
         override fun onLongClick(p0: View?): Boolean {
+            // 弹不出菜单
             val popup = PopupMenu(this@CrimeListFragment.context,p0)
             popup.menuInflater.inflate(R.menu.popup, popup.menu)
             popup.setOnMenuItemClickListener {

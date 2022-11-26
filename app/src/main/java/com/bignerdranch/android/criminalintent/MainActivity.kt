@@ -8,10 +8,12 @@ import java.util.*
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(),
-    CrimeListFragment.Callbacks{
+    CrimeListFragment.Callbacks, CrimeFragment.Callbacks{
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
@@ -31,5 +33,11 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
+    override fun onCrimeDeleted(crimeFragment: CrimeFragment) {
+//        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .remove(crimeFragment)
+            .commit()
+    }
 
 }

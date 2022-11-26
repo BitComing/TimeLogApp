@@ -19,10 +19,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
-import com.bignerdranch.android.criminalintent.Crime
-import com.bignerdranch.android.criminalintent.CrimeDetailViewModel
-import com.bignerdranch.android.criminalintent.DatePickerFragment
-import com.bignerdranch.android.criminalintent.R
+import com.bignerdranch.android.criminalintent.*
 import java.io.File
 import java.lang.String.format
 import java.util.*
@@ -39,8 +36,17 @@ private const val REQUEST_PHOTO = 2
 private const val DATE_FORMAT = "EEE, MMM, dd"
 
 class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
+
+    interface Callbacks {
+        fun onCrimeDeleted(fragment: CrimeFragment)
+    }
+
+    private var callbacks: Callbacks? = null
+
     private var param1: String? = null
     private var param2: String? = null
+
+
     private lateinit var crime : Crime
     private lateinit var photoFile: File
 
@@ -48,6 +54,8 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     private lateinit var durTxt : EditText
 
     private lateinit var btnDate : Button
+    private lateinit var btnDelete: Button
+
     private  lateinit var ckbSolved : CheckBox
 //    private lateinit var reportButton : Button
 //    private lateinit var suspectButton: Button
@@ -81,6 +89,8 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         durTxt = view.findViewById(R.id.edit_duration)
 
         btnDate = view.findViewById(R.id.crime_date) as Button
+        btnDelete = view.findViewById(R.id.btn_delete_note)
+
         ckbSolved = view.findViewById(R.id.crime_solved) as CheckBox
 //        reportButton = view.findViewById(R.id.crime_report) as Button
 //        suspectButton = view.findViewById(R.id.crime_suspect) as Button
@@ -147,6 +157,10 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
                 show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
+        btnDelete.setOnClickListener{
+            crimeDetailViewModel.deleteCrime(crime)
+            callbacks?.onCrimeDeleted(this@CrimeFragment)
+        }
 //        reportButton.setOnClickListener {
 //            Intent(Intent.ACTION_SEND).apply {
 //                type = "text/plain"
@@ -198,6 +212,11 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 //            }
 //        }
 
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
     override fun onStop(){
         super.onStop()
