@@ -5,14 +5,19 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.PopupMenu
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -29,6 +34,7 @@ class CrimeListFragment : Fragment() {
     private lateinit var crimeRecyclerView: RecyclerView
     private var adapter: CrimeAdapter? = CrimeAdapter(emptyList())
     private lateinit var crimeList: LiveData<List<Crime>>
+    private lateinit var btnFloat : FloatingActionButton
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
@@ -55,6 +61,8 @@ class CrimeListFragment : Fragment() {
         crimeRecyclerView = view.findViewById(R.id.crimeRecyclerView) as RecyclerView
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
         crimeRecyclerView.adapter=adapter
+
+        btnFloat = view.findViewById(R.id.btn_float)
         return view
     }
 
@@ -69,6 +77,13 @@ class CrimeListFragment : Fragment() {
                 }
             }
         )
+        btnFloat.setOnClickListener{
+            val crime = Crime()
+            crimeListViewModel.addCrime(crime)
+            callbacks?.onCrimeSelected(crime.id)
+            true
+        }
+
     }
     private fun updateUI(crimes: List<Crime>) {
         // 更新crimeListViewModel临时存储的数据，并实例化CrimeAdapter
@@ -143,7 +158,7 @@ class CrimeListFragment : Fragment() {
 
     //每一View的数据装载到CrimeHolder中
     private inner class CrimeHolder(view: View):
-        RecyclerView.ViewHolder(view), View.OnClickListener {
+        RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
         private lateinit var crime: Crime
         private val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
@@ -157,11 +172,30 @@ class CrimeListFragment : Fragment() {
         fun bind(crime: Crime) {
             this.crime = crime
             titleTextView.text = this.crime.title
-            dateTextView.text = this.crime.date.toString()
+//            val f1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+            val f1 = SimpleDateFormat("HH:mm:ss")
+            val date = this.crime.date
+            dateTextView.text = f1.format(date)
         }
         // 点击viewholder的反馈
         override fun onClick(v: View) {
             callbacks?.onCrimeSelected(crime.id)
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            val popup = PopupMenu(this@CrimeListFragment.context,p0)
+            popup.menuInflater.inflate(R.menu.popup, popup.menu)
+            popup.setOnMenuItemClickListener {
+                if (it.itemId == R.id.menu_delete) {
+                    Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
+                }
+                if (it.itemId == R.id.two) {
+                    Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
+                }
+                true
+            }
+            popup.show()
+            return true
         }
     }
 
