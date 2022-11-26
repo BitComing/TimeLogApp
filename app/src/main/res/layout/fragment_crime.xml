@@ -38,8 +38,9 @@
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="当前时间(尚未使用)"/>
+                android:text="当前时间"/>
             <EditText
+                android:id="@+id/edit_now_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="当前时间"/>
@@ -55,27 +56,31 @@
                 android:text="持续时间（min）"/>
             <EditText
                 android:id="@+id/edit_duration"
-                android:digits="0123456789"
                 android:maxLength="4"
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="持续时间（min）"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/add_time_btn"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
+                android:id="@+id/btn_add_15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:text="15min"/>
             <Button
+                android:id="@+id/btn_add_30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:text="30min"/>
             <Button
+                android:id="@+id/btn_add_60"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="60min"/>

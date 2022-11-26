@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.*
 import java.io.File
 import java.lang.String.format
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val ARG_PARAM1 = "param1"
@@ -43,8 +44,8 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     private var callbacks: Callbacks? = null
 
-    private var param1: String? = null
-    private var param2: String? = null
+//    private var param1: String? = null
+//    private var param2: String? = null
 
 
     private lateinit var crime : Crime
@@ -52,9 +53,14 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     private lateinit var edTxtTitle : EditText
     private lateinit var durTxt : EditText
+    private lateinit var nowTxt : EditText
 
     private lateinit var btnDate : Button
     private lateinit var btnDelete: Button
+    private lateinit var btnAdd15 : Button
+    private lateinit var btnAdd30 : Button
+    private lateinit var btnAdd60 : Button
+    private lateinit var addBtnList : LinearLayout
 
     private  lateinit var ckbSolved : CheckBox
 //    private lateinit var reportButton : Button
@@ -70,10 +76,11 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+//        arguments?.let {
+//            param1 = it.getString(ARG_PARAM1)
+//            param2 = it.getString(ARG_PARAM2)
+//        }
+
         crime = Crime()
         val crimeId : UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
         crimeDetailViewModel.loadCrime(crimeId)
@@ -87,11 +94,22 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         val view =  inflater.inflate(R.layout.fragment_crime, container, false)
         edTxtTitle = view.findViewById(R.id.crime_title) as EditText
         durTxt = view.findViewById(R.id.edit_duration)
+        nowTxt = view.findViewById(R.id.edit_now_time)
 
         btnDate = view.findViewById(R.id.crime_date) as Button
         btnDelete = view.findViewById(R.id.btn_delete_note)
 
+        btnAdd15 = view.findViewById(R.id.btn_add_15)
+        btnAdd30 = view.findViewById(R.id.btn_add_30)
+        btnAdd60 = view.findViewById(R.id.btn_add_60)
+        addBtnList = view.findViewById(R.id.add_time_btn)
+
         ckbSolved = view.findViewById(R.id.crime_solved) as CheckBox
+
+        val f1 = SimpleDateFormat("HH:mm")
+        val date = this.crime.date
+        nowTxt.setText(f1.format(date))
+
 //        reportButton = view.findViewById(R.id.crime_report) as Button
 //        suspectButton = view.findViewById(R.id.crime_suspect) as Button
 //        photoButton = view.findViewById(R.id.crime_camera) as ImageButton
@@ -160,6 +178,15 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         btnDelete.setOnClickListener{
             crimeDetailViewModel.deleteCrime(crime)
             callbacks?.onCrimeDeleted(this@CrimeFragment)
+        }
+        addBtnList.setOnClickListener{
+            var num = Integer.parseInt(durTxt.text.toString())
+            when(it.id) {
+                R.id.btn_add_15-> num+=15
+                R.id.btn_add_30-> num+=30
+                R.id.btn_add_60-> num+=60
+            }
+            durTxt.setText(num.toString())
         }
 //        reportButton.setOnClickListener {
 //            Intent(Intent.ACTION_SEND).apply {
