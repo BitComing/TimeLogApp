@@ -1,4 +1,4 @@
-package com.bnuz.example.criminalintentRoom
+package com.bignerdranch.android.criminalintent.fragment
 
 import android.app.Activity
 import android.content.Intent

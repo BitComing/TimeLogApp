@@ -1,59 +1,81 @@
 package com.bignerdranch.android.criminalintent
 
-import android.content.Context
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.util.Log
-import android.view.View
 import androidx.fragment.app.Fragment
-import com.bnuz.example.criminalintentRoom.CrimeFragment
+import androidx.viewpager.widget.ViewPager
+import com.bignerdranch.android.criminalintent.adapter.FragmentAdapter
+import com.bignerdranch.android.criminalintent.fragment.CrimeFragment
+import com.bignerdranch.android.criminalintent.fragment.CrimeListFragment
+import com.bignerdranch.android.criminalintent.fragment.OneFragment
+import com.bignerdranch.android.criminalintent.fragment.SettingFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(),
     CrimeListFragment.Callbacks, CrimeFragment.Callbacks{
 
-//    private lateinit var mTabLayout: TabLayout
-    private lateinit var mFragments: MutableList<Fragment>
+    private lateinit var bnView: BottomNavigationView
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
+        viewPager = findViewById(R.id.view_pager)
+        bnView = findViewById(R.id.bottom_nav_view)
 
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        val fragments: MutableList<Fragment> = ArrayList<Fragment>()
+        fragments.add(CrimeListFragment())
+        fragments.add(OneFragment())
+        fragments.add(SettingFragment())
 
+        val adapter = FragmentAdapter(fragments, supportFragmentManager)
+        viewPager.adapter = adapter
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.view_pager)
         if(currentFragment == null) {
             val fragment = CrimeListFragment()
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container,fragment)
+                .add(R.id.view_pager,fragment)
                 .commit()
         }
     }
 
-//    override fun onCreateView(
-//        parent: View?,
-//        name: String,
-//        context: Context,
-//        attrs: AttributeSet
-//    ): View? {
-//        return super.onCreateView(parent, name, context, attrs)
-//
-//        mTabLayout = findViewById(R.id.bottom_tab_layout)
-//        mTabLayout.addTab(mTabLayout.newTab().setText("ff"))
-//        mTabLayout.addTab(mTabLayout.newTab().setText("cc"))
-//        return parent
-//    }
-
     override fun onStart() {
         super.onStart()
+
+        // 导航栏的控制
+        bnView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.tab_one -> viewPager.currentItem = 0
+                R.id.tab_two -> viewPager.currentItem = 1
+                R.id.tab_three -> viewPager.currentItem = 2
+            }
+            false
+        })
+
+        // ViewPager 滑动事件监听,BottomNavigationView跟随滑动切换
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
+
+            // 将滑动到的页面对应的 menu 设置为选中状态
+            override fun onPageSelected(i: Int) {
+                bnView.menu.getItem(i).isChecked = true
+            }
+
+            override fun onPageScrollStateChanged(i: Int) {}
+        })
     }
 
     override fun onCrimeSelected(crimeId: UUID) {
         val fragment = CrimeFragment.newInstance(crimeId)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .replace(R.id.view_pager, fragment)
             .addToBackStack(null)
             .commit()
     }

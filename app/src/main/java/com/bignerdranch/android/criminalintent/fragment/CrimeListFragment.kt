@@ -1,7 +1,8 @@
-package com.bignerdranch.android.criminalintent
+package com.bignerdranch.android.criminalintent.fragment
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,13 +16,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.criminalintent.Crime
+import com.bignerdranch.android.criminalintent.CrimeActivity
+import com.bignerdranch.android.criminalintent.CrimeListViewModel
+import com.bignerdranch.android.criminalintent.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
+private const val ARG_CRIME_ID = "crime_id"
 private  const val TAG = "CrimeListFragment"
 class CrimeListFragment : Fragment() {
 
@@ -80,8 +84,11 @@ class CrimeListFragment : Fragment() {
         btnFloat.setOnClickListener{
             val crime = Crime()
             crimeListViewModel.addCrime(crime)
-            callbacks?.onCrimeSelected(crime.id)
-            true
+            val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
+            intent.putExtra(ARG_CRIME_ID,crime.id)
+            startActivity(intent)
+//            callbacks?.onCrimeSelected(crime.id)
+//            true
         }
 
     }
@@ -99,64 +106,55 @@ class CrimeListFragment : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.fragment_crime_list, menu)
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//
+//        inflater.inflate(R.menu.fragment_crime_list, menu)
+//        val searchView = menu.findItem(R.id.app_bar_search).actionView as SearchView
+//        searchView.maxWidth = 900
+//
+//        searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(p0: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(p0: String?): Boolean {
+//                val pattern = p0?.trim() as String
+//                crimeList = crimeListViewModel.findCrime(pattern)
+//                crimeList.observe(
+//                    viewLifecycleOwner,
+//                    Observer { crimes ->
+//                        crimes?.let {
+//                            updateUI(crimes)
+//                        }
+//                    }
+//                )
+//                return true
+//            }
+//        })
+//    }
 
-        val searchView = menu.findItem(R.id.app_bar_search).actionView as SearchView
-        searchView.maxWidth = 900
-
-        searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                val pattern = p0?.trim() as String
-                crimeList = crimeListViewModel.findCrime(pattern)
-                crimeList.observe(
-                    viewLifecycleOwner,
-                    Observer { crimes ->
-                        crimes?.let {
-                            updateUI(crimes)
-                        }
-                    }
-                )
-                return true
-            }
-        })
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.new_crime->{
-                val crime = Crime()
-                crimeListViewModel.addCrime(crime)
-                callbacks?.onCrimeSelected(crime.id)
-                true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when(item.itemId){
+//            R.id.new_crime->{
+//                val crime = Crime()
+//                crimeListViewModel.addCrime(crime)
+//                callbacks?.onCrimeSelected(crime.id)
+//                true
+//            }
+//            else -> return super.onOptionsItemSelected(item)
+//        }
+//    }
 
 
     companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CrimeListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1,param1)
-                    putString(ARG_PARAM2,param2)
-                }
-            }
+
         fun newInstance(): CrimeListFragment {
             return CrimeListFragment()
         }
     }
 
 
-
-    //每一View的数据装载到CrimeHolder中
     private inner class CrimeHolder(view: View):
         RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
@@ -166,37 +164,40 @@ class CrimeListFragment : Fragment() {
 
         init {
             itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
         }
 
-        // 定义数据绑定方法
         fun bind(crime: Crime) {
             this.crime = crime
             titleTextView.text = this.crime.title
 //            val f1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-            val f1 = SimpleDateFormat("HH:mm:ss")
+            val f1 = SimpleDateFormat("HH:mm")
             val date = this.crime.date
             dateTextView.text = f1.format(date)
         }
         // 点击viewholder的反馈
         override fun onClick(v: View) {
-            callbacks?.onCrimeSelected(crime.id)
+//            callbacks?.onCrimeSelected(crime.id)
+            val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
+            intent.putExtra(ARG_CRIME_ID,crime.id)
+            startActivity(intent)
         }
 
         override fun onLongClick(p0: View?): Boolean {
-            // 弹不出菜单
-            val popup = PopupMenu(this@CrimeListFragment.context,p0)
+            val popup = PopupMenu(this@CrimeListFragment.activity,p0)
             popup.menuInflater.inflate(R.menu.popup, popup.menu)
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.menu_delete) {
+
                     Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
                 }
                 if (it.itemId == R.id.two) {
                     Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
                 }
-                true
+                false
             }
             popup.show()
-            return true
+            return false
         }
     }
 
@@ -214,6 +215,4 @@ class CrimeListFragment : Fragment() {
             holder.bind(crime)
         }
     }
-
-
 }

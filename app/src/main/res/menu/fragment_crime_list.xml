@@ -6,10 +6,10 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />
-    <item
-        android:id ="@+id/new_crime"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="New Crime"
-        app:showAsAction="ifRoom|withText"/>
+<!--    <item-->
+<!--        android:id ="@+id/new_crime"-->
+<!--        android:icon="@android:drawable/ic_menu_add"-->
+<!--        android:title="New Crime"-->
+<!--        app:showAsAction="ifRoom|withText"/>-->
 </menu>
 

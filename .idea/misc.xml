@@ -3,14 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/drawable/border_crime_item.xml" value="0.14" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/drawable/ic_add.xml" value="0.1425" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/drawable/seleced_menu_color.xml" value="0.174" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/activity_crime.xml" value="0.15520833333333334" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/fragment_crime.xml" value="0.22" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/fragment_crime_list.xml" value="0.1" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/fragment_note.xml" value="0.22" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/fragment_one.xml" value="0.28489583333333335" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/list_item_crime.xml" value="0.23333333333333334" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/tab_menu.xml" value="0.15520833333333334" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/menu/fragment_crime_list.xml" value="0.1" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/menu/popup.xml" value="0.16510416666666666" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/menu/tab_menu.xml" value="0.16510416666666666" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/xml/files.xml" value="0.140234375" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/xml/searchable.xml" value="0.18333333333333332" />
       </map>
