@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
     <!-- 主体背景颜色值 -->
-    <solid android:color="#CCCCFF" />
+    <solid android:color="#d8e4e8" />
     <!-- 连框宽度和颜色值 -->
     <stroke
         android:width="0.01dp"
-        android:color="#CCCCFF" />
+        android:color="#d8e4e8" />
+    <corners android:radius="10dp" />
 </shape>

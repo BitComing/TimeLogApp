@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -15,6 +16,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
+private const val TAG = "CrimeActivity"
 private const val ARG_CRIME_ID = "crime_id"
 class CrimeActivity : AppCompatActivity() {
 
@@ -46,6 +48,8 @@ class CrimeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crime)
+        supportActionBar?.hide()
+
         edTxtTitle = findViewById(R.id.crime_title)
         durTxt = findViewById(R.id.edit_duration)
         nowTxt = findViewById(R.id.edit_now_time)
@@ -68,8 +72,6 @@ class CrimeActivity : AppCompatActivity() {
         val f1 = SimpleDateFormat("HH:mm")
         val date = this.crime.date
         nowTxt.setText(f1.format(date))
-
-
     }
 
     override fun onStart() {
@@ -79,6 +81,7 @@ class CrimeActivity : AppCompatActivity() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 crime.title = p0.toString()
+                Log.d(TAG,"I had changed")
             }
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -140,6 +143,11 @@ class CrimeActivity : AppCompatActivity() {
                     updateUI()
                 }
             })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        crimeDetailViewModel.saveCrime(crime)
     }
     private fun updateUI() {
         edTxtTitle.setText(crime.title)

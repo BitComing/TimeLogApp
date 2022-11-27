@@ -44,9 +44,6 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     private var callbacks: Callbacks? = null
 
-//    private var param1: String? = null
-//    private var param2: String? = null
-
 
     private lateinit var crime : Crime
     private lateinit var photoFile: File
@@ -257,7 +254,6 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     }
 
     private fun updateUI() {
-//        Log.d(TAG,"************* $crime.title *************")
         edTxtTitle.setText(crime.title)
         btnDate.text = crime.date.toString()
         ckbSolved.apply {

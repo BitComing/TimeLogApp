@@ -26,6 +26,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/crime_date"
         android:textSize="30dp"
+        android:fontFamily="sans-serif-medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,6 +35,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/crime_title"
         android:textSize="30dp"
+        android:fontFamily="sans-serif-black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/crime_date"

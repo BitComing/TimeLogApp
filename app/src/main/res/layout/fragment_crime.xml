@@ -105,7 +105,7 @@
         android:id="@+id/btn_delete_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/delete_note"/>
+        android:text="DELETE"/>
     <Button
         android:id="@+id/crime_date"
         android:layout_width="match_parent"
