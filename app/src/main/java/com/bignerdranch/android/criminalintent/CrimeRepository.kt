@@ -27,7 +27,7 @@ class CrimeRepository private constructor(context: Context){
     fun getCrime(id: UUID): LiveData<Crime?> = crimeDao.getCrime(id)
 
     fun findCrime(str: String): LiveData<List<Crime>> = crimeDao.findCrime(str)
-
+    fun getAllDates() : LiveData<List<Date>> = crimeDao.getAllDates()
     fun updateCrime(crime: Crime) {
         executor.execute {
             crimeDao.updateCrime(crime)

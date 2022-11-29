@@ -25,5 +25,7 @@ interface CrimeDao {
     @Delete
     fun deleteCrime(crime: Crime)
 
+    @Query("SELECT DISTINCT date FROM crime order by date desc")
+    fun getAllDates(): LiveData<List<Date>>
 }
 

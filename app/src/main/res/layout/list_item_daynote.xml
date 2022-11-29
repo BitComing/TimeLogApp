@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/text_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2022/11/29"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
