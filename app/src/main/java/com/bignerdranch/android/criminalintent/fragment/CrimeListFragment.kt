@@ -244,7 +244,7 @@ class CrimeListFragment : Fragment() {
     // DayNote的RecyclerView
     private inner class DayNoteHolder(view: View):RecyclerView.ViewHolder(view) {
         val textDay: TextView = itemView.findViewById(R.id.text_day)
-        val recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
+        var recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
 
     }
     private inner class DayNoteAdapter(var dates: List<String>): RecyclerView.Adapter<DayNoteHolder>(){
@@ -255,8 +255,27 @@ class CrimeListFragment : Fragment() {
         }
         override fun onBindViewHolder(holder: DayNoteHolder, position: Int) {
             val date = dates[position]
+            val crimes: MutableList<Crime> = ArrayList()
             holder.textDay.text = date
-//            holder.recyclerView
+            holder.recyclerView.layoutManager= LinearLayoutManager(context)
+            holder.recyclerView.adapter=CrimeAdapter(crimes)
+            crimeListViewModel.crimeListLiveData.observe(
+                viewLifecycleOwner,
+                Observer { crimes ->
+                    crimes?.let {
+                        // 可优化成数据库搜索
+                        val f1 = SimpleDateFormat("yyyy-MM-dd")
+                        val rightNotes : MutableList<Crime> = ArrayList()
+                        for (i in crimes) {
+                            if (f1.format(i.date).toString() == date) {
+                                rightNotes+=i
+                            }
+                        }
+
+                        holder.recyclerView.adapter=CrimeAdapter(rightNotes)
+                    }
+                }
+            )
 
         }
     }
