@@ -109,7 +109,13 @@ class CrimeListFragment : Fragment() {
 
     }
     private fun updateDates(dates: List<Date>) {
-        dayNoteAdapter = DayNoteAdapter(dates)
+        var goodDates :MutableList<String> = ArrayList()
+        val f1 = SimpleDateFormat("yyyy-MM-dd")
+        for (i in dates) {
+            goodDates+=f1.format(i)
+        }
+
+        dayNoteAdapter = DayNoteAdapter(goodDates.distinct())
         dayNoteRecyclerView.adapter = dayNoteAdapter
     }
 //    private fun updateUI(crimes: List<Crime>) {
@@ -241,7 +247,7 @@ class CrimeListFragment : Fragment() {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
 
     }
-    private inner class DayNoteAdapter(var dates: List<Date>): RecyclerView.Adapter<DayNoteHolder>(){
+    private inner class DayNoteAdapter(var dates: List<String>): RecyclerView.Adapter<DayNoteHolder>(){
         override fun getItemCount() = dates.size
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayNoteHolder {
             val view = layoutInflater.inflate(R.layout.list_item_daynote,parent,false)
@@ -249,9 +255,9 @@ class CrimeListFragment : Fragment() {
         }
         override fun onBindViewHolder(holder: DayNoteHolder, position: Int) {
             val date = dates[position]
-            val f1 = SimpleDateFormat("yyyy-MM-dd")
-            holder.textDay.text = f1.format(date)
+            holder.textDay.text = date
 //            holder.recyclerView
+
         }
     }
 }

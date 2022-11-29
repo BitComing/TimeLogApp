@@ -28,7 +28,7 @@ interface CrimeDao {
 //    @Query("SELECT DISTINCT date FROM crime order by date desc")
 //    fun getAllDates(): LiveData<List<Date>>
 
-    @Query("SELECT DISTINCT DATE(date) FROM crime order by date desc")
+    @Query("SELECT DISTINCT date FROM crime order by date desc")
     fun getAllDates(): LiveData<List<Date>>
 }
 
