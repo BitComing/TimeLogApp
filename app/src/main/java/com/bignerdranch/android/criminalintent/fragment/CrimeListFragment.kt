@@ -32,10 +32,10 @@ class CrimeListFragment : Fragment() {
     }
     private var callbacks: Callbacks? = null
 
-    private lateinit var crimeRecyclerView: RecyclerView
-    private var adapter: CrimeAdapter? = CrimeAdapter(emptyList())
-//    private lateinit var dayNoteRecyclerView: RecyclerView
-//    private var dayNoteAdapter: DayNoteAdapter? = DayNoteAdapter(emptyList())
+//    private lateinit var crimeRecyclerView: RecyclerView
+//    private var adapter: CrimeAdapter? = CrimeAdapter(emptyList())
+    private lateinit var dayNoteRecyclerView: RecyclerView
+    private var dayNoteAdapter: DayNoteAdapter? = DayNoteAdapter(emptyList())
 
 //    private lateinit var crimeList: LiveData<List<Crime>>
 //    private lateinit var dateList : LiveData<List<Date>>
@@ -65,13 +65,13 @@ class CrimeListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_crime_list, container, false)
 
-        crimeRecyclerView = view.findViewById(R.id.crimeRecyclerView) as RecyclerView
-        crimeRecyclerView.layoutManager = LinearLayoutManager(context)
-        crimeRecyclerView.adapter=adapter
+//        crimeRecyclerView = view.findViewById(R.id.crimeRecyclerView) as RecyclerView
+//        crimeRecyclerView.layoutManager = LinearLayoutManager(context)
+//        crimeRecyclerView.adapter=adapter
 
-//        dayNoteRecyclerView = view.findViewById(R.id.crimeRecyclerView)
-//        dayNoteRecyclerView.layoutManager = LinearLayoutManager(context)
-//        dayNoteRecyclerView.adapter=dayNoteAdapter
+        dayNoteRecyclerView = view.findViewById(R.id.crimeRecyclerView)
+        dayNoteRecyclerView.layoutManager = LinearLayoutManager(context)
+        dayNoteRecyclerView.adapter=dayNoteAdapter
 
         btnFloat = view.findViewById(R.id.btn_float)
         return view
@@ -80,23 +80,23 @@ class CrimeListFragment : Fragment() {
     // 视图完成创建时，进行订阅监视
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 待用
-        crimeListViewModel.crimeListLiveData.observe(
-            viewLifecycleOwner,
-            Observer { crimes ->
-                crimes?.let {
-                    updateUI(crimes)
-                }
-            }
-        )
-//        crimeListViewModel.getAllDates().observe(
+//        // 待用
+//        crimeListViewModel.crimeListLiveData.observe(
 //            viewLifecycleOwner,
-//            Observer { dates ->
-//                dates?.let {
-//                    updateDates(dates)
+//            Observer { crimes ->
+//                crimes?.let {
+//                    updateUI(crimes)
 //                }
 //            }
 //        )
+        crimeListViewModel.getAllDates().observe(
+            viewLifecycleOwner,
+            Observer { dates ->
+                dates?.let {
+                    updateDates(dates)
+                }
+            }
+        )
         btnFloat.setOnClickListener{
             val crime = Crime()
             crimeListViewModel.addCrime(crime)
@@ -108,14 +108,14 @@ class CrimeListFragment : Fragment() {
         }
 
     }
-//    private fun updateDates(dates: List<Date>) {
-//        dayNoteAdapter = DayNoteAdapter(dates)
-//        dayNoteRecyclerView.adapter = dayNoteAdapter
-//    }
-    private fun updateUI(crimes: List<Crime>) {
-        adapter = CrimeAdapter(crimes)
-        crimeRecyclerView.adapter = adapter
+    private fun updateDates(dates: List<Date>) {
+        dayNoteAdapter = DayNoteAdapter(dates)
+        dayNoteRecyclerView.adapter = dayNoteAdapter
     }
+//    private fun updateUI(crimes: List<Crime>) {
+//        adapter = CrimeAdapter(crimes)
+//        crimeRecyclerView.adapter = adapter
+//    }
 
 
     override fun onDetach() {
