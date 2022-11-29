@@ -161,6 +161,7 @@ class CrimeListFragment : Fragment() {
         private lateinit var crime: Crime
         private val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
         private val dateTextView: TextView = itemView.findViewById(R.id.crime_date)
+        private val durationTextView: TextView = itemView.findViewById(R.id.text_duration)
 
         init {
             itemView.setOnClickListener(this)
@@ -170,10 +171,13 @@ class CrimeListFragment : Fragment() {
         fun bind(crime: Crime) {
             this.crime = crime
             titleTextView.text = this.crime.title
+            durationTextView.text = this.crime.duration.toString()+"min"
 //            val f1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
             val f1 = SimpleDateFormat("HH:mm")
             val date = this.crime.date
-            dateTextView.text = f1.format(date)
+            val startTime = Date(date.time - crime.duration * 60 * 1000)
+            dateTextView.text = f1.format(startTime)+ " - "+f1.format(date)
+
         }
         // 点击viewholder的反馈
         override fun onClick(v: View) {
