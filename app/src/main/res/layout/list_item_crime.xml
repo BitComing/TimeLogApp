@@ -38,14 +38,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:text="end"
             android:textSize="25dp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="serif"/>
         <TextView
             android:id="@+id/text_start_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="start"
             android:textSize="25dp"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="serif"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/show_content"
@@ -70,8 +70,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="duration"
-            android:textSize="25dp"
-            android:layout_marginLeft="10dp" />
+            android:textSize="20dp"
+            android:fontFamily="serif"
+            android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/crime_title"
             android:layout_width="wrap_content"
@@ -80,7 +81,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="Content"
             android:textSize="30dp"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="sans-serif"
             android:layout_marginLeft="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

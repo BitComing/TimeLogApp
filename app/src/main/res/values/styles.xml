@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button_blue_style">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@drawable/button_blue_background</item>
+    </style>
+</resources>

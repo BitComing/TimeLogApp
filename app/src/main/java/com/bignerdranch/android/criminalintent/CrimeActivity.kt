@@ -34,6 +34,7 @@ class CrimeActivity : AppCompatActivity() {
     private lateinit var edTxtTitle : EditText
     private lateinit var durTxt : EditText
     private lateinit var nowTxt : EditText
+    private lateinit var txtStart: EditText
 
     private lateinit var btnDate : Button
     private lateinit var btnDelete: Button
@@ -56,8 +57,9 @@ class CrimeActivity : AppCompatActivity() {
         edTxtTitle = findViewById(R.id.crime_title)
         durTxt = findViewById(R.id.edit_duration)
         nowTxt = findViewById(R.id.edit_now_time)
+        txtStart = findViewById(R.id.edit_start_time)
 
-        btnDate = findViewById(R.id.crime_date)
+//        btnDate = findViewById(R.id.crime_date)
         btnDelete = findViewById(R.id.btn_delete)
         btnBack = findViewById(R.id.btn_back)
 
@@ -85,7 +87,6 @@ class CrimeActivity : AppCompatActivity() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 crime.title = p0.toString()
-                Log.d(TAG,"I had changed")
             }
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -99,6 +100,10 @@ class CrimeActivity : AppCompatActivity() {
                 if (p0 != null) {
                     if(p0.isNotEmpty()) {
                         crime.duration = Integer.parseInt(p0.toString())
+                        val f1 = SimpleDateFormat("HH:mm")
+                        val date = crime.date
+                        val startTime = Date(date.time - crime.duration * 60 * 1000)
+                        txtStart.setText(f1.format(startTime))
                     }
                 }
             }
@@ -106,8 +111,25 @@ class CrimeActivity : AppCompatActivity() {
             }
         }
         durTxt.addTextChangedListener(durationWatcher)
-        durTxt.setText("0")
 
+        // 更新持续时间、
+        val editNow = object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0 != null) {
+                    if(p0.isNotEmpty()) {
+                        val f1 = SimpleDateFormat("HH:mm")
+//                        val date = crime.date
+//                        val startTime = Date(date.time - crime.duration * 60 * 1000)
+
+                    }
+                }
+            }
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        }
+        nowTxt.addTextChangedListener(editNow)
         ckbSolved.apply {
             setOnCheckedChangeListener{_,isChecked ->
                 crime.isSolved = isChecked
@@ -151,18 +173,26 @@ class CrimeActivity : AppCompatActivity() {
                 }
             })
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        crimeDetailViewModel.saveCrime(crime)
-    }
     private fun updateUI() {
         edTxtTitle.setText(crime.title)
-        btnDate.text = crime.date.toString()
+        durTxt.setText(crime.duration.toString())
+
+        val f1 = SimpleDateFormat("HH:mm")
+        val date = this.crime.date
+        val startTime = Date(date.time - crime.duration * 60 * 1000)
+        txtStart.setText(f1.format(startTime))
+        nowTxt.setText(f1.format(date))
+//        btnDate.text = crime.date.toString()
         ckbSolved.apply {
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
         }
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        crimeDetailViewModel.saveCrime(crime)
+    }
+
+
 
 }
