@@ -18,6 +18,8 @@ import java.util.*
 
 private const val TAG = "CrimeActivity"
 private const val ARG_CRIME_ID = "crime_id"
+private const val DIALOG_DATE = "DialogDate"
+private const val REQUEST_DATE = 0
 class CrimeActivity : AppCompatActivity() {
 
 //    interface Callbacks {
@@ -35,6 +37,7 @@ class CrimeActivity : AppCompatActivity() {
 
     private lateinit var btnDate : Button
     private lateinit var btnDelete: Button
+    private lateinit var btnBack: Button
     private lateinit var btnAdd15 : Button
     private lateinit var btnAdd30 : Button
     private lateinit var btnAdd60 : Button
@@ -55,7 +58,8 @@ class CrimeActivity : AppCompatActivity() {
         nowTxt = findViewById(R.id.edit_now_time)
 
         btnDate = findViewById(R.id.crime_date)
-        btnDelete = findViewById(R.id.btn_delete_note)
+        btnDelete = findViewById(R.id.btn_delete)
+        btnBack = findViewById(R.id.btn_back)
 
         btnAdd15 = findViewById(R.id.btn_add_15)
         btnAdd30 = findViewById(R.id.btn_add_30)
@@ -117,6 +121,9 @@ class CrimeActivity : AppCompatActivity() {
 //        }
         btnDelete.setOnClickListener{
             crimeDetailViewModel.deleteCrime(crime)
+            this.finish()
+        }
+        btnBack.setOnClickListener{
             this.finish()
         }
         btnAdd15.setOnClickListener{

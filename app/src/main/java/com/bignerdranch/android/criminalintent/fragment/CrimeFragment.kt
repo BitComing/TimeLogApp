@@ -94,7 +94,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         nowTxt = view.findViewById(R.id.edit_now_time)
 
         btnDate = view.findViewById(R.id.crime_date) as Button
-        btnDelete = view.findViewById(R.id.btn_delete_note)
+        btnDelete = view.findViewById(R.id.btn_delete)
 
         btnAdd15 = view.findViewById(R.id.btn_add_15)
         btnAdd30 = view.findViewById(R.id.btn_add_30)

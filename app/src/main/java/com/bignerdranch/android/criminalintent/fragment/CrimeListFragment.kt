@@ -184,7 +184,8 @@ class CrimeListFragment : Fragment() {
 
         private lateinit var crime: Crime
         private val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
-        private val dateTextView: TextView = itemView.findViewById(R.id.crime_date)
+        private val txtStartTime: TextView = itemView.findViewById(R.id.text_start_time)
+        private val txtEndTime: TextView = itemView.findViewById(R.id.text_end_time)
         private val durationTextView: TextView = itemView.findViewById(R.id.text_duration)
 
         init {
@@ -200,8 +201,8 @@ class CrimeListFragment : Fragment() {
             val f1 = SimpleDateFormat("HH:mm")
             val date = this.crime.date
             val startTime = Date(date.time - crime.duration * 60 * 1000)
-            dateTextView.text = f1.format(startTime)+ " - "+f1.format(date)
-
+            txtStartTime.text = f1.format(startTime)
+            txtEndTime.text = f1.format(date)
         }
         override fun onClick(v: View) {
 //            callbacks?.onCrimeSelected(crime.id)
@@ -244,8 +245,8 @@ class CrimeListFragment : Fragment() {
     // DayNote的RecyclerView
     private inner class DayNoteHolder(view: View):RecyclerView.ViewHolder(view) {
         val textDay: TextView = itemView.findViewById(R.id.text_day)
+        val textFold: TextView = itemView.findViewById(R.id.txt_fold)
         var recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
-
     }
     private inner class DayNoteAdapter(var dates: List<String>): RecyclerView.Adapter<DayNoteHolder>(){
         override fun getItemCount() = dates.size
@@ -257,6 +258,13 @@ class CrimeListFragment : Fragment() {
             val date = dates[position]
             val crimes: MutableList<Crime> = ArrayList()
             holder.textDay.text = date
+            holder.textFold.setOnClickListener {
+                when(holder.recyclerView.visibility) {
+                    View.VISIBLE -> holder.recyclerView.visibility=View.GONE
+                    else -> holder.recyclerView.visibility=View.VISIBLE
+                }
+            }
+
             holder.recyclerView.layoutManager= LinearLayoutManager(context)
             holder.recyclerView.adapter=CrimeAdapter(crimes)
             crimeListViewModel.crimeListLiveData.observe(

@@ -43,6 +43,7 @@
                 android:id="@+id/edit_now_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edit_for_line_bg"
                 android:hint="当前时间"/>
         </LinearLayout>
         <LinearLayout
@@ -60,6 +61,7 @@
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edit_for_line_bg"
                 android:hint="持续时间（min）"/>
         </LinearLayout>
         <LinearLayout
@@ -72,17 +74,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
+                android:background="@drawable/btn_drawable"
                 android:text="15min"/>
             <Button
                 android:id="@+id/btn_add_30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
+                android:background="@drawable/btn_drawable"
                 android:text="30min"/>
             <Button
                 android:id="@+id/btn_add_60"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_drawable"
                 android:text="60min"/>
         </LinearLayout>
         <LinearLayout
@@ -102,15 +107,20 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/btn_delete_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="DELETE"/>
-    <Button
         android:id="@+id/crime_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Wed Nov 14 11:56 EST 2018"/>
+    <Button
+        android:id="@+id/btn_deletes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DELETE"/>
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认"/>
 
     <CheckBox
         android:id="@+id/crime_solved"

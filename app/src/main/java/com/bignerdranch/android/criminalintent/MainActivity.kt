@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager
 import com.bignerdranch.android.criminalintent.adapter.FragmentAdapter
 import com.bignerdranch.android.criminalintent.fragment.CrimeFragment
 import com.bignerdranch.android.criminalintent.fragment.CrimeListFragment
-import com.bignerdranch.android.criminalintent.fragment.OneFragment
+import com.bignerdranch.android.criminalintent.fragment.TodoFragment
 import com.bignerdranch.android.criminalintent.fragment.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(),
 
         val fragments: MutableList<Fragment> = ArrayList<Fragment>()
         fragments.add(CrimeListFragment())
-        fragments.add(OneFragment())
+        fragments.add(TodoFragment())
         fragments.add(SettingFragment())
 
         val adapter = FragmentAdapter(fragments, supportFragmentManager)
