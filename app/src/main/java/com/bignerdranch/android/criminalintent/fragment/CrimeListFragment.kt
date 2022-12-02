@@ -4,12 +4,11 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
-import android.widget.PopupMenu
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -40,6 +39,7 @@ class CrimeListFragment : Fragment() {
 //    private lateinit var crimeList: LiveData<List<Crime>>
 //    private lateinit var dateList : LiveData<List<Date>>
 
+//    private lateinit var editSearch: EditText
     private lateinit var btnFloat : FloatingActionButton
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
@@ -68,6 +68,8 @@ class CrimeListFragment : Fragment() {
 //        crimeRecyclerView = view.findViewById(R.id.crimeRecyclerView) as RecyclerView
 //        crimeRecyclerView.layoutManager = LinearLayoutManager(context)
 //        crimeRecyclerView.adapter=adapter
+
+//        editSearch = view.findViewById(R.id.search_main)
 
         dayNoteRecyclerView = view.findViewById(R.id.crimeRecyclerView)
         dayNoteRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -106,6 +108,7 @@ class CrimeListFragment : Fragment() {
 //            callbacks?.onCrimeSelected(crime.id)
 //            true
         }
+
 
     }
     private fun updateDates(dates: List<Date>) {
@@ -246,6 +249,7 @@ class CrimeListFragment : Fragment() {
     private inner class DayNoteHolder(view: View):RecyclerView.ViewHolder(view) {
         val textDay: TextView = itemView.findViewById(R.id.text_day)
         val textFold: TextView = itemView.findViewById(R.id.txt_fold)
+        val txtTotalTime: TextView = itemView.findViewById(R.id.txt_total_time)
         var recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
     }
     private inner class DayNoteAdapter(var dates: List<String>): RecyclerView.Adapter<DayNoteHolder>(){
@@ -257,6 +261,7 @@ class CrimeListFragment : Fragment() {
         override fun onBindViewHolder(holder: DayNoteHolder, position: Int) {
             val date = dates[position]
             val crimes: MutableList<Crime> = ArrayList()
+
             holder.textDay.text = date
             holder.textFold.setOnClickListener {
                 when(holder.recyclerView.visibility) {
@@ -269,18 +274,20 @@ class CrimeListFragment : Fragment() {
             holder.recyclerView.adapter=CrimeAdapter(crimes)
             crimeListViewModel.crimeListLiveData.observe(
                 viewLifecycleOwner,
-                Observer { crimes ->
-                    crimes?.let {
+                Observer { notes ->
+                    notes?.let {
                         // 可优化成数据库搜索
+                        var totalTime = 0
                         val f1 = SimpleDateFormat("yyyy-MM-dd")
                         val rightNotes : MutableList<Crime> = ArrayList()
-                        for (i in crimes) {
+                        for (i in it) {
                             if (f1.format(i.date).toString() == date) {
                                 rightNotes+=i
+                                totalTime+=i.duration
                             }
                         }
-
                         holder.recyclerView.adapter=CrimeAdapter(rightNotes)
+                        holder.txtTotalTime.text = "本日已记录时间：$totalTime"+"mins"
                     }
                 }
             )

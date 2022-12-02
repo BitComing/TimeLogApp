@@ -17,21 +17,54 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#FFE5CC">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/crimeRecyclerView"
                 android:text="每日名言"
-                android:textSize="20dp"/>
+                android:textSize="15dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="时间就是金钱，效率就是生命"
+                android:text="时间就是金钱，效率就是生命。"
                 android:textSize="20dp"/>
         </LinearLayout>
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/search_main"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/title_main"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="5dp">-->
 
+<!--            <EditText-->
+<!--                android:id="@+id/search_et"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:background="@drawable/dialog_btn_bg"-->
+<!--                android:hint="请输入搜索信息"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:textSize="16sp">-->
+<!--                <requestFocus />-->
+<!--            </EditText>-->
+<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/search_iv_sh"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="@mipmap/search"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignParentRight="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="20dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:onClick="onClick"/>&ndash;&gt;-->
+<!--        </RelativeLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/crimeRecyclerView"
@@ -39,7 +72,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/title_main"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
 
