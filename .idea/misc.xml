@@ -11,7 +11,7 @@
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/drawable/edit_for_line_bg.xml" value="0.1305" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/drawable/ic_add.xml" value="0.1425" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/drawable/seleced_menu_color.xml" value="0.174" />
-        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/activity_crime.xml" value="0.3333333333333333" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/activity_crime.xml" value="0.22" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/fragment_crime.xml" value="0.22" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/layout/fragment_crime_list.xml" value="0.3333333333333333" />
@@ -27,6 +27,7 @@
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/menu/popup.xml" value="0.16510416666666666" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/menu/tab_menu.xml" value="0.16510416666666666" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/xml/files.xml" value="0.140234375" />
+        <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/xml/network_security_config.xml" value="0.159375" />
         <entry key="..\:/Toolist/Code/CriminalIntent/app/src/main/res/xml/searchable.xml" value="0.18333333333333332" />
       </map>
     </option>

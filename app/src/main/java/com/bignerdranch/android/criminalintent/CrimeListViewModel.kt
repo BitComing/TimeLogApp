@@ -10,11 +10,11 @@ class CrimeListViewModel : ViewModel() {
     private val crimeLiveData = CrimeRepository.get()
     val crimeListLiveData = crimeLiveData.getCrimes()
 
-    fun addCrime(crime :Crime){
-        crimeRepository.addCrime(crime)
+    fun addCrime(note :Note){
+        crimeRepository.addCrime(note)
     }
 
-    fun findCrime(str: String) : LiveData<List<Crime>> {
+    fun findCrime(str: String) : LiveData<List<Note>> {
         return crimeRepository.findCrime(str)
     }
     fun getAllDates() : LiveData<List<Date>> {

@@ -6,7 +6,6 @@ import androidx.room.Room
 import com.bignerdranch.android.criminalintent.database.CrimeDatabase
 import com.bignerdranch.android.criminalintent.database.migration_1_2
 import com.bignerdranch.android.criminalintent.database.migration_2_3
-import java.io.File
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -23,26 +22,26 @@ class CrimeRepository private constructor(context: Context){
     private val executor = Executors.newSingleThreadExecutor()
     private val filesDir = context.applicationContext.filesDir
 
-    fun getCrimes(): LiveData<List<Crime>> = crimeDao.getCrimes()
-    fun getCrime(id: UUID): LiveData<Crime?> = crimeDao.getCrime(id)
+    fun getCrimes(): LiveData<List<Note>> = crimeDao.getCrimes()
+    fun getCrime(id: UUID): LiveData<Note?> = crimeDao.getCrime(id)
 
-    fun findCrime(str: String): LiveData<List<Crime>> = crimeDao.findCrime(str)
+    fun findCrime(str: String): LiveData<List<Note>> = crimeDao.findCrime(str)
     fun getAllDates() : LiveData<List<Date>> = crimeDao.getAllDates()
-    fun updateCrime(crime: Crime) {
+    fun updateCrime(note: Note) {
         executor.execute {
-            crimeDao.updateCrime(crime)
+            crimeDao.updateCrime(note)
         }
     }
 
-    fun addCrime(crime: Crime) {
+    fun addCrime(note: Note) {
         executor.execute {
-            crimeDao.addCrime(crime)
+            crimeDao.addCrime(note)
         }
     }
 
-    fun deleteCrime(crime: Crime) {
+    fun deleteCrime(note: Note) {
         executor.execute {
-            crimeDao.deleteCrime(crime)
+            crimeDao.deleteCrime(note)
         }
     }
 

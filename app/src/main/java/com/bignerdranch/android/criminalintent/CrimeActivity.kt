@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
-import com.bignerdranch.android.criminalintent.fragment.CrimeFragment
 //import com.bnuz.example.criminalintentRoom.CrimeFragment
 import java.io.File
 import java.text.SimpleDateFormat
@@ -28,7 +26,7 @@ class CrimeActivity : AppCompatActivity() {
 //
 //    private var callbacks: Callbacks? = null
 
-    private lateinit var crime : Crime
+    private lateinit var note : Note
     private lateinit var photoFile: File
 
     private lateinit var edTxtTitle : EditText
@@ -68,15 +66,15 @@ class CrimeActivity : AppCompatActivity() {
         btnAdd60 = findViewById(R.id.btn_add_60)
         addBtnList = findViewById(R.id.add_time_btn)
 
-        ckbSolved = findViewById(R.id.crime_solved)
+//        ckbSolved = findViewById(R.id.crime_solved)
 
-        crime = Crime()
+        note = Note()
         val bundle = this.getIntent().getExtras()
         val crimeId : UUID = bundle?.getSerializable(ARG_CRIME_ID) as UUID
         crimeDetailViewModel.loadCrime(crimeId)
 
         val f1 = SimpleDateFormat("HH:mm")
-        val date = this.crime.date
+        val date = this.note.date
         nowTxt.setText(f1.format(date))
     }
 
@@ -86,7 +84,7 @@ class CrimeActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                crime.title = p0.toString()
+                note.title = p0.toString()
             }
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -99,10 +97,10 @@ class CrimeActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0 != null) {
                     if(p0.isNotEmpty()) {
-                        crime.duration = Integer.parseInt(p0.toString())
+                        note.duration = Integer.parseInt(p0.toString())
                         val f1 = SimpleDateFormat("HH:mm")
-                        val date = crime.date
-                        val startTime = Date(date.time - crime.duration * 60 * 1000)
+                        val date = note.date
+                        val startTime = Date(date.time - note.duration * 60 * 1000)
                         txtStart.setText(f1.format(startTime))
                     }
                 }
@@ -130,11 +128,11 @@ class CrimeActivity : AppCompatActivity() {
             }
         }
         nowTxt.addTextChangedListener(editNow)
-        ckbSolved.apply {
-            setOnCheckedChangeListener{_,isChecked ->
-                crime.isSolved = isChecked
-            }
-        }
+//        ckbSolved.apply {
+//            setOnCheckedChangeListener{_,isChecked ->
+//                note.isSolved = isChecked
+//            }
+//        }
 //        btnDate.setOnClickListener {
 //            DatePickerFragment.newInstance(crime.date).apply {
 //                setTargetFragment(this, REQUEST_DATE)
@@ -142,7 +140,7 @@ class CrimeActivity : AppCompatActivity() {
 //            }
 //        }
         btnDelete.setOnClickListener{
-            crimeDetailViewModel.deleteCrime(crime)
+            crimeDetailViewModel.deleteCrime(note)
             this.finish()
         }
         btnBack.setOnClickListener{
@@ -164,33 +162,33 @@ class CrimeActivity : AppCompatActivity() {
             durTxt.setText(num.toString())
         }
 
-        crimeDetailViewModel.crimeLiveData.observe(
+        crimeDetailViewModel.noteLiveData.observe(
             this,
-            androidx.lifecycle.Observer { crime ->
-                crime?.let {
-                    this.crime = crime
+            androidx.lifecycle.Observer { note1 ->
+                note1?.let {
+                    this.note = note1
                     updateUI()
                 }
             })
     }
     private fun updateUI() {
-        edTxtTitle.setText(crime.title)
-        durTxt.setText(crime.duration.toString())
+        edTxtTitle.setText(note.title)
+        durTxt.setText(note.duration.toString())
 
         val f1 = SimpleDateFormat("HH:mm")
-        val date = this.crime.date
-        val startTime = Date(date.time - crime.duration * 60 * 1000)
+        val date = this.note.date
+        val startTime = Date(date.time - note.duration * 60 * 1000)
         txtStart.setText(f1.format(startTime))
         nowTxt.setText(f1.format(date))
 //        btnDate.text = crime.date.toString()
-        ckbSolved.apply {
-            isChecked = crime.isSolved
-            jumpDrawablesToCurrentState()
-        }
+//        ckbSolved.apply {
+//            isChecked = note.isSolved
+//            jumpDrawablesToCurrentState()
+//        }
     }
     override fun onDestroy() {
         super.onDestroy()
-        crimeDetailViewModel.saveCrime(crime)
+        crimeDetailViewModel.saveCrime(note)
     }
 
 

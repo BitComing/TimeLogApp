@@ -2,26 +2,20 @@ package com.bignerdranch.android.criminalintent.fragment
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.*
 import java.io.File
-import java.lang.String.format
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,7 +39,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     private var callbacks: Callbacks? = null
 
 
-    private lateinit var crime : Crime
+    private lateinit var note : Note
     private lateinit var photoFile: File
 
     private lateinit var edTxtTitle : EditText
@@ -78,7 +72,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 //            param2 = it.getString(ARG_PARAM2)
 //        }
 
-        crime = Crime()
+        note = Note()
         val crimeId : UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
         crimeDetailViewModel.loadCrime(crimeId)
     }
@@ -104,7 +98,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         ckbSolved = view.findViewById(R.id.crime_solved) as CheckBox
 
         val f1 = SimpleDateFormat("HH:mm")
-        val date = this.crime.date
+        val date = this.note.date
         nowTxt.setText(f1.format(date))
 
 //        reportButton = view.findViewById(R.id.crime_report) as Button
@@ -117,11 +111,11 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        crimeDetailViewModel.crimeLiveData.observe(
+        crimeDetailViewModel.noteLiveData.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { crime ->
                 crime?.let {
-                    this.crime = crime
+                    this.note = crime
 //                    photoFile = crimeDetailViewModel.getPhotoFile(crime)
 //                    photoUri = FileProvider.getUriForFile(requireActivity(),
 //                        "com.bignerdranch.android.criminalintent.fileprovider",
@@ -139,7 +133,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                crime.title = p0.toString()
+                note.title = p0.toString()
             }
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -152,7 +146,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0 != null) {
                     if(p0.isNotEmpty()) {
-                        crime.duration = Integer.parseInt(p0.toString())
+                        note.duration = Integer.parseInt(p0.toString())
                     }
                 }
             }
@@ -163,17 +157,17 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
         ckbSolved.apply {
             setOnCheckedChangeListener{_,isChecked ->
-                crime.isSolved = isChecked
+                note.isSolved = isChecked
             }
         }
         btnDate.setOnClickListener {
-            DatePickerFragment.newInstance(crime.date).apply {
+            DatePickerFragment.newInstance(note.date).apply {
                 setTargetFragment(this@CrimeFragment, REQUEST_DATE)
                 show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
         btnDelete.setOnClickListener{
-            crimeDetailViewModel.deleteCrime(crime)
+            crimeDetailViewModel.deleteCrime(note)
             callbacks?.onCrimeDeleted(this@CrimeFragment)
         }
         addBtnList.setOnClickListener{
@@ -244,20 +238,20 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     }
     override fun onStop(){
         super.onStop()
-        crimeDetailViewModel.saveCrime(crime)
+        crimeDetailViewModel.saveCrime(note)
     }
 
     // 重写接口方法
     override fun onDateSelected(date: Date) {
-        crime.date = date
+        note.date = date
         updateUI()
     }
 
     private fun updateUI() {
-        edTxtTitle.setText(crime.title)
-        btnDate.text = crime.date.toString()
+        edTxtTitle.setText(note.title)
+        btnDate.text = note.date.toString()
         ckbSolved.apply {
-            isChecked = crime.isSolved
+            isChecked = note.isSolved
             jumpDrawablesToCurrentState()
         }
 //        if(crime.suspect.isNotEmpty()) {
@@ -284,8 +278,8 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
                     }
                     it.moveToFirst()
                     val suspect = it.getString(0)
-                    crime.suspect = suspect
-                    crimeDetailViewModel.saveCrime(crime)
+                    note.suspect = suspect
+                    crimeDetailViewModel.saveCrime(note)
 //                    suspectButton.text = suspect
                 }
             }
@@ -293,19 +287,19 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     }
 
     private fun getCrimeReport(): String {
-        val solvedString = if(crime.isSolved) {
+        val solvedString = if(note.isSolved) {
             getString(R.string.crime_report_solved)
         } else {
             getString(R.string.crime_report_unsolved)
         }
-        val dateString = DateFormat.format(DATE_FORMAT,crime.date).toString()
+        val dateString = DateFormat.format(DATE_FORMAT,note.date).toString()
 
-        var suspect = if(crime.suspect.isBlank()) {
+        var suspect = if(note.suspect.isBlank()) {
             getString(R.string.crime_report_no_suspect)
         } else {
             getString(R.string .crime_report_suspect)
         }
-        return getString(R.string.crime_report,crime.title,
+        return getString(R.string.crime_report,note.title,
         dateString,solvedString,suspect)
     }
     companion object {

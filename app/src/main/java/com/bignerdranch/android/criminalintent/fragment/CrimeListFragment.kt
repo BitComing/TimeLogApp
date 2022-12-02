@@ -1,25 +1,18 @@
 package com.bignerdranch.android.criminalintent.fragment
 
-import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.criminalintent.*
-import com.bignerdranch.android.criminalintent.bean.DayNote
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 private const val ARG_CRIME_ID = "crime_id"
@@ -100,10 +93,10 @@ class CrimeListFragment : Fragment() {
             }
         )
         btnFloat.setOnClickListener{
-            val crime = Crime()
-            crimeListViewModel.addCrime(crime)
+            val note = Note()
+            crimeListViewModel.addCrime(note)
             val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
-            intent.putExtra(ARG_CRIME_ID,crime.id)
+            intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
 //            callbacks?.onCrimeSelected(crime.id)
 //            true
@@ -185,7 +178,7 @@ class CrimeListFragment : Fragment() {
     private inner class CrimeHolder(view: View):
         RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
-        private lateinit var crime: Crime
+        private lateinit var note: Note
         private val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
         private val txtStartTime: TextView = itemView.findViewById(R.id.text_start_time)
         private val txtEndTime: TextView = itemView.findViewById(R.id.text_end_time)
@@ -196,21 +189,21 @@ class CrimeListFragment : Fragment() {
             itemView.setOnLongClickListener(this)
         }
 
-        fun bind(crime: Crime) {
-            this.crime = crime
-            titleTextView.text = this.crime.title
-            durationTextView.text = this.crime.duration.toString()+"min"
+        fun bind(note: Note) {
+            this.note = note
+            titleTextView.text = this.note.title
+            durationTextView.text = this.note.duration.toString()+"min"
 //            val f1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
             val f1 = SimpleDateFormat("HH:mm")
-            val date = this.crime.date
-            val startTime = Date(date.time - crime.duration * 60 * 1000)
+            val date = this.note.date
+            val startTime = Date(date.time - note.duration * 60 * 1000)
             txtStartTime.text = f1.format(startTime)
             txtEndTime.text = f1.format(date)
         }
         override fun onClick(v: View) {
 //            callbacks?.onCrimeSelected(crime.id)
             val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
-            intent.putExtra(ARG_CRIME_ID,crime.id)
+            intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
         }
         override fun onLongClick(p0: View?): Boolean {
@@ -231,16 +224,16 @@ class CrimeListFragment : Fragment() {
         }
     }
 
-    private inner class  CrimeAdapter(var crimes: List<Crime>) :
+    private inner class  CrimeAdapter(var notes: List<Note>) :
         RecyclerView.Adapter<CrimeHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : CrimeHolder {
             val view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
             return CrimeHolder(view)
         }
-        override fun getItemCount() = crimes.size
+        override fun getItemCount() = notes.size
 
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-            val crime = crimes[position]
+            val crime = notes[position]
             holder.bind(crime)
         }
     }
@@ -260,7 +253,7 @@ class CrimeListFragment : Fragment() {
         }
         override fun onBindViewHolder(holder: DayNoteHolder, position: Int) {
             val date = dates[position]
-            val crimes: MutableList<Crime> = ArrayList()
+            val notes: MutableList<Note> = ArrayList()
 
             holder.textDay.text = date
             holder.textFold.setOnClickListener {
@@ -271,7 +264,7 @@ class CrimeListFragment : Fragment() {
             }
 
             holder.recyclerView.layoutManager= LinearLayoutManager(context)
-            holder.recyclerView.adapter=CrimeAdapter(crimes)
+            holder.recyclerView.adapter=CrimeAdapter(notes)
             crimeListViewModel.crimeListLiveData.observe(
                 viewLifecycleOwner,
                 Observer { notes ->
@@ -279,7 +272,7 @@ class CrimeListFragment : Fragment() {
                         // 可优化成数据库搜索
                         var totalTime = 0
                         val f1 = SimpleDateFormat("yyyy-MM-dd")
-                        val rightNotes : MutableList<Crime> = ArrayList()
+                        val rightNotes : MutableList<Note> = ArrayList()
                         for (i in it) {
                             if (f1.format(i.date).toString() == date) {
                                 rightNotes+=i

@@ -2,28 +2,28 @@ package com.bignerdranch.android.criminalintent.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.bignerdranch.android.criminalintent.Crime
+import com.bignerdranch.android.criminalintent.Note
 import java.util.*
 
 @Dao
 interface CrimeDao {
     @Query("SELECT * FROM crime order by date desc")
-    fun getCrimes(): LiveData<List<Crime>>
+    fun getCrimes(): LiveData<List<Note>>
 
     @Query("SELECT * FROM crime WHERE id=(:id)")
-    fun getCrime(id: UUID): LiveData<Crime?>
+    fun getCrime(id: UUID): LiveData<Note?>
 
     @Query("SELECT * FROM crime WHERE title like '%'||:str||'%'")
-    fun findCrime(str: String): LiveData<List<Crime>>
+    fun findCrime(str: String): LiveData<List<Note>>
 
     @Update
-    fun updateCrime(crime: Crime)
+    fun updateCrime(note: Note)
 
     @Insert
-    fun addCrime(crime: Crime)
+    fun addCrime(note: Note)
 
     @Delete
-    fun deleteCrime(crime: Crime)
+    fun deleteCrime(note: Note)
 
 //    @Query("SELECT DISTINCT date FROM crime order by date desc")
 //    fun getAllDates(): LiveData<List<Date>>

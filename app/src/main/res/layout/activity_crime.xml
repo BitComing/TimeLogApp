@@ -4,12 +4,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:layout_margin="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022-10-31"
+        android:textSize="40dp"
+        android:layout_marginBottom="25dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp">
         <!--        <LinearLayout-->
@@ -30,11 +36,13 @@
         <!--                android:layout_height="wrap_content"-->
         <!--                android:src="@android:drawable/ic_menu_camera"/>-->
         <!--        </LinearLayout>-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginBottom="25dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,7 +93,7 @@
             android:id="@+id/crime_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="这段时间做了什么？"
+            android:hint="输入"
             android:textSize="20dp"/>
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -109,7 +117,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:gravity="center">
         <Button
             android:id="@+id/btn_add_15"
             android:layout_width="wrap_content"
@@ -154,12 +163,11 @@
             android:text="确认"/>
     </LinearLayout>
 
-
-    <CheckBox
-        android:id="@+id/crime_solved"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/crime_solved_label"/>
+<!--    <CheckBox-->
+<!--        android:id="@+id/crime_solved"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/crime_solved_label"/>-->
     <!--    <Button-->
     <!--        android:id="@+id/crime_suspect"-->
     <!--        android:layout_width="match_parent"-->

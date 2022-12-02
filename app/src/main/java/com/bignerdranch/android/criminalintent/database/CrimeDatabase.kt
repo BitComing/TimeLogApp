@@ -2,13 +2,12 @@ package com.bignerdranch.android.criminalintent.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.bignerdranch.android.criminalintent.Crime
+import com.bignerdranch.android.criminalintent.Note
 
-@Database(entities = [Crime::class], version = 3)
+@Database(entities = [Note::class], version = 3)
 //通过注解实现了数据的类型转换，类的实现在CrimeTypeConverters上
 @TypeConverters(CrimeTypeConverters::class)
 abstract class CrimeDatabase : RoomDatabase(){

@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "CRIME")
-data class Crime (@PrimaryKey
+data class Note (@PrimaryKey
                   val id: UUID = UUID.randomUUID(),
-                  var title: String = "",
-                  var date: Date = Date(),
-                  var duration: Int = 0,
-                  var isSolved: Boolean = false,
-                  var suspect: String = "") {
+                 var title: String = "",
+                 var date: Date = Date(),
+                 var duration: Int = 0,
+                 var isSolved: Boolean = false,
+                 var suspect: String = "") {
     val photoFileName get() = "IMG_$id.jpg"
 }
 
