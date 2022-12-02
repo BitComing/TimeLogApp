@@ -7,6 +7,7 @@
     android:gravity="center"
     android:layout_margin="16dp">
     <TextView
+        android:id="@+id/txt_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2022-10-31"
@@ -53,14 +54,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="开始时间"
-                    android:textSize="30dp"/>
+                    android:textSize="30dp"
+                    android:inputType="number"/>
                 <EditText
                     android:id="@+id/edit_start_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="开始时间"
                     android:fontFamily="serif"
-                    android:textSize="30dp"/>
+                    android:textSize="30dp"
+                    android:inputType="number"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

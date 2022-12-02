@@ -11,8 +11,8 @@ interface TodoDao {
     @Query("SELECT * FROM todos")
     fun getTodos(): LiveData<List<Todo>>
 
-    @Query("SELECT * FROM todos WHERE id=(:id)")
-    fun getTodo(id: UUID): LiveData<Note?>
+    @Query("SELECT * FROM todos WHERE tid=(:tid)")
+    fun getTodo(tid: UUID): LiveData<Todo?>
 
 //    @Query("SELECT * FROM todos WHERE title like '%'||:str||'%'")
 //    fun findCrime(str: String): LiveData<List<Note>>

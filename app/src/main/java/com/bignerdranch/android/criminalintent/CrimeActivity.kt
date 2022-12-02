@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 //import com.bnuz.example.criminalintentRoom.CrimeFragment
 import java.io.File
@@ -28,6 +25,8 @@ class CrimeActivity : AppCompatActivity() {
 
     private lateinit var note : Note
     private lateinit var photoFile: File
+
+    private lateinit var txtDate: TextView
 
     private lateinit var edTxtTitle : EditText
     private lateinit var durTxt : EditText
@@ -52,6 +51,8 @@ class CrimeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_crime)
         supportActionBar?.hide()
 
+        txtDate = findViewById(R.id.txt_date)
+
         edTxtTitle = findViewById(R.id.crime_title)
         durTxt = findViewById(R.id.edit_duration)
         nowTxt = findViewById(R.id.edit_now_time)
@@ -74,8 +75,10 @@ class CrimeActivity : AppCompatActivity() {
         crimeDetailViewModel.loadCrime(crimeId)
 
         val f1 = SimpleDateFormat("HH:mm")
+        val formatDate = SimpleDateFormat("yyyy-MM-dd")
         val date = this.note.date
         nowTxt.setText(f1.format(date))
+        txtDate.text=formatDate.format(date)
     }
 
     override fun onStart() {
@@ -110,17 +113,18 @@ class CrimeActivity : AppCompatActivity() {
         }
         durTxt.addTextChangedListener(durationWatcher)
 
-        // 更新持续时间、
+        // 更新完成时间
         val editNow = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0 != null) {
                     if(p0.isNotEmpty()) {
-                        val f1 = SimpleDateFormat("HH:mm")
-//                        val date = crime.date
-//                        val startTime = Date(date.time - crime.duration * 60 * 1000)
 
+//                        val f1 = SimpleDateFormat("HH:mm")
+//                        val date = note.date
+//                        val startTime = Date(date.time - note.duration * 60 * 1000)
+//
                     }
                 }
             }

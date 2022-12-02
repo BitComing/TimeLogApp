@@ -280,7 +280,13 @@ class CrimeListFragment : Fragment() {
                             }
                         }
                         holder.recyclerView.adapter=CrimeAdapter(rightNotes)
-                        holder.txtTotalTime.text = "本日已记录时间：$totalTime"+"mins"
+                        if (totalTime > 60) {
+                            val hour = totalTime/60
+                            val min = totalTime%60
+                            holder.txtTotalTime.text = "本日已记录时间：$hour"+"h"+"$min"+"min"
+                        } else{
+                            holder.txtTotalTime.text = "本日已记录时间：$totalTime"+"min"
+                        }
                     }
                 }
             )

@@ -30,10 +30,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_height="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
         android:background="@drawable/border_crime_item">
         <TextView
             android:id="@+id/text_end_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="end"
             android:textSize="25dp"
@@ -41,7 +42,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:fontFamily="serif"/>
         <TextView
             android:id="@+id/text_start_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="start"
             android:textSize="25dp"
@@ -81,6 +82,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="Content"
             android:textSize="30dp"
+            android:maxLines="1"
             android:fontFamily="sans-serif"
             android:layout_marginLeft="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
