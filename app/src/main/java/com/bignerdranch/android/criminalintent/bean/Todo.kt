@@ -7,7 +7,7 @@ import java.util.*
 @Entity(tableName = "TODOs")
 data class Todo (
     @PrimaryKey
-    val id: UUID = UUID.randomUUID(),
-    var title: String = "",
+    val tid: UUID = UUID.randomUUID(),
+    var content: String = "",
     var isSolved: Boolean = false,
 )
