@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 //import com.bnuz.example.criminalintentRoom.CrimeFragment
 import java.io.File
@@ -30,8 +32,9 @@ class CrimeActivity : AppCompatActivity() {
 
     private lateinit var edTxtTitle : EditText
     private lateinit var durTxt : EditText
-    private lateinit var nowTxt : EditText
-    private lateinit var txtStart: EditText
+
+    private lateinit var nowTxt : TextView
+    private lateinit var txtStart: TextView
 
     private lateinit var btnDate : Button
     private lateinit var btnDelete: Button
@@ -113,25 +116,7 @@ class CrimeActivity : AppCompatActivity() {
         }
         durTxt.addTextChangedListener(durationWatcher)
 
-        // 更新完成时间
-        val editNow = object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0 != null) {
-                    if(p0.isNotEmpty()) {
 
-//                        val f1 = SimpleDateFormat("HH:mm")
-//                        val date = note.date
-//                        val startTime = Date(date.time - note.duration * 60 * 1000)
-//
-                    }
-                }
-            }
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        }
-        nowTxt.addTextChangedListener(editNow)
 //        ckbSolved.apply {
 //            setOnCheckedChangeListener{_,isChecked ->
 //                note.isSolved = isChecked
@@ -166,6 +151,13 @@ class CrimeActivity : AppCompatActivity() {
             durTxt.setText(num.toString())
         }
 
+        txtStart.setOnClickListener{
+            dialogTimePicker()
+        }
+        nowTxt.setOnClickListener{
+            dialogTimePicker()
+        }
+
         crimeDetailViewModel.noteLiveData.observe(
             this,
             androidx.lifecycle.Observer { note1 ->
@@ -189,6 +181,14 @@ class CrimeActivity : AppCompatActivity() {
 //            isChecked = note.isSolved
 //            jumpDrawablesToCurrentState()
 //        }
+    }
+    private fun dialogTimePicker() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = LayoutInflater.from(this)
+        val view = inflater.inflate(R.layout.dialog_timepicker, null);
+        val dialog = builder.create();
+        dialog.show();
+        dialog.getWindow()?.setContentView(view);
     }
     override fun onDestroy() {
         super.onDestroy()

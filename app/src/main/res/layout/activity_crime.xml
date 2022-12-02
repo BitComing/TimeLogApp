@@ -48,15 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:layout_marginRight="40dp">
                 <TextView
-                    style="?android:listSeparatorTextViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="开始时间"
                     android:textSize="30dp"
+                    android:fontFamily="serif"
                     android:inputType="number"/>
-                <EditText
+                <TextView
                     android:id="@+id/edit_start_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,16 +69,17 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical">
                 <TextView
-                    style="?android:listSeparatorTextViewStyle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="完成时间"
+                    android:fontFamily="serif"
                     android:textSize="30dp"/>
-                <EditText
+                <TextView
                     android:id="@+id/edit_now_time"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="完成时间"
                     android:fontFamily="serif"
