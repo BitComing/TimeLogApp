@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import com.bignerdranch.android.criminalintent.R
 import com.bignerdranch.android.criminalintent.SettingActivity
 
 class SettingFragment : Fragment() {
-    private lateinit var linearSetting: LinearLayout
+    private lateinit var linearSetting: RelativeLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
