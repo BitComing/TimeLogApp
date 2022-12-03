@@ -30,8 +30,8 @@
         android:text="开始计时"/>
 
     <Button
-        android:id="@+id/bt_restart_timer"
+        android:id="@+id/bt_create_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="复位"/>
+        android:text="创建"/>
 </LinearLayout>
