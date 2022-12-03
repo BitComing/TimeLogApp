@@ -103,7 +103,8 @@ class CrimeListFragment : Fragment() {
 //            true
         }
         btnFloat.setOnLongClickListener{
-
+            val intent = Intent(this.activity, TimerActivity::class.java)
+            startActivity(intent)
             false
         }
 
