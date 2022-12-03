@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TimePicker
+        android:id="@+id/time_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:timePickerMode="spinner"/>
@@ -12,10 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/bt_cancel_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消"/>
         <Button
+            android:id="@+id/bt_sure_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="确认"/>

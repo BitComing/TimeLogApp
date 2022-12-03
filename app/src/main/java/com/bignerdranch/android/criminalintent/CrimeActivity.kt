@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -152,6 +153,7 @@ class CrimeActivity : AppCompatActivity() {
         }
 
         txtStart.setOnClickListener{
+
             dialogTimePicker()
         }
         nowTxt.setOnClickListener{
@@ -182,19 +184,34 @@ class CrimeActivity : AppCompatActivity() {
 //            jumpDrawablesToCurrentState()
 //        }
     }
+    @SuppressLint("NewApi")
     private fun dialogTimePicker() {
         val builder = AlertDialog.Builder(this)
         val inflater = LayoutInflater.from(this)
-        val view = inflater.inflate(R.layout.dialog_timepicker, null);
-        val dialog = builder.create();
-        dialog.show();
-        dialog.getWindow()?.setContentView(view);
+        // 包含新的api
+        val view = inflater.inflate(R.layout.dialog_timepicker, null)
+
+        val timePicker = view.findViewById(R.id.time_picker) as TimePicker
+        val btCancel = view.findViewById(R.id.bt_cancel_time) as Button
+        val btSure = view.findViewById(R.id.bt_sure_time) as Button
+
+
+        val dialog = builder.create()
+        dialog.show()
+        dialog.getWindow()?.setContentView(view)
+
+        btCancel.setOnClickListener{
+            dialog.hide()
+        }
+        btSure.setOnClickListener{
+            val hour = timePicker.hour
+            val min = timePicker.minute
+            dialog.hide()
+        }
     }
     override fun onDestroy() {
         super.onDestroy()
         crimeDetailViewModel.saveCrime(note)
     }
-
-
 
 }
