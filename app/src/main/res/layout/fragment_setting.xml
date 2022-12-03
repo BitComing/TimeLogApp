@@ -43,18 +43,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linear_setting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/linear_setting"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:id="@+id/tab_set">
-
+            android:layout_marginTop="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
