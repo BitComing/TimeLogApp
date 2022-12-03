@@ -8,7 +8,7 @@ import kotlin.time.Duration.Companion.hours
 
 @Entity(tableName = "CRIME")
 data class Note (@PrimaryKey
-                  val id: UUID = UUID.randomUUID(),
+                 val id: UUID = UUID.randomUUID(),
                  var title: String = "",
                  var date: Date = Date(),
                  var duration: Int = 0,

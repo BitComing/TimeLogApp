@@ -79,19 +79,11 @@ class CrimeActivity : AppCompatActivity() {
         addBtnList = findViewById(R.id.add_time_btn)
 
 
-
-        note = Note()
         val bundle = this.getIntent().getExtras()
         val crimeId : UUID = bundle?.getSerializable(ARG_CRIME_ID) as UUID
         crimeDetailViewModel.loadCrime(crimeId)
 
-        val f1 = SimpleDateFormat("HH:mm")
-        val formatDate = SimpleDateFormat("yyyy-MM-dd")
-        todayDate = this.note.date
-        strTodayDate = todayDate.toString()
-
-        txtEnd.setText(f1.format(todayDate))
-        txtDate.text=formatDate.format(todayDate)
+        note = Note()
 
     }
 
@@ -185,16 +177,30 @@ class CrimeActivity : AppCompatActivity() {
                 }
             })
     }
+    // 真正的初始化地方
     private fun updateUI() {
+
+        val formatDate = SimpleDateFormat("yyyy-MM-dd")
+        val fTime = SimpleDateFormat("HH:mm")
+        val date = this.note.date
+        note.hour = note.date.hours
+        note.min = note.date.minutes
+        val hour = note.hour
+        val min = note.min
+
+        val startTime = Date(date.time - note.duration * 60 * 1000)
+        todayDate = this.note.date
+        strTodayDate = todayDate.toString()
+
+
         edTxtTitle.setText(note.title)
         txtDur.setText(note.duration.toString())
+//        txtEnd.text = fTime.format(todayDate)
+        txtEnd.text = fTime.format(todayDate)
+        txtDate.text = formatDate.format(todayDate)
+        txtStart.text = fTime.format(startTime)
+        Log.d(TAG,"$hour:$min")
 
-        val f1 = SimpleDateFormat("HH:mm")
-        val date = this.note.date
-        val startTime = Date(date.time - note.duration * 60 * 1000)
-        txtStart.setText(f1.format(startTime))
-        txtEnd.setText(f1.format(date))
-//        btnDate.text = crime.date.toString()
 //        ckbSolved.apply {
 //            isChecked = note.isSolved
 //            jumpDrawablesToCurrentState()
@@ -225,11 +231,21 @@ class CrimeActivity : AppCompatActivity() {
         btSure.setOnClickListener{
 //            val formatDate = SimpleDateFormat("yyyy-MM-dd")
 //            val tmpDate = formatDate.format(todayDate).toString()
-//
-//            val hour = timePicker.hour
-//            val min = timePicker.minute
-//            val time = "$hour:$min"
-//
+
+            val hour = timePicker.hour
+            val min = timePicker.minute
+            val time = "$hour:$min"
+
+//            crimeDetailViewModel.noteLiveData.observe(
+//                this,
+//                androidx.lifecycle.Observer { note1 ->
+//                    note1?.let {
+//                        it.hour = hour
+//                        it.min = min
+//                        this.note = it
+//                        updateUI()
+//                    }
+//                })
 //            val f = SimpleDateFormat("HH:mm")
 //            txtEnd.text = time
 //

@@ -13,6 +13,9 @@ interface CrimeDao {
     @Query("SELECT * FROM crime WHERE id=(:id)")
     fun getCrime(id: UUID): LiveData<Note?>
 
+    @Query("SELECT * FROM crime WHERE id=(:id)")
+    fun getNote(id: UUID): Note?
+
     @Query("SELECT * FROM crime WHERE title like '%'||:str||'%'")
     fun findCrime(str: String): LiveData<List<Note>>
 

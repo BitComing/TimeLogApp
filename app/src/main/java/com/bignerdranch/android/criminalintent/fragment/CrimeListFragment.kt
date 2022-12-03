@@ -211,11 +211,10 @@ class CrimeListFragment : Fragment() {
             popup.menuInflater.inflate(R.menu.popup, popup.menu)
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.menu_delete) {
-
-                    Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "删除功能开发", Toast.LENGTH_SHORT).show()
                 }
                 if (it.itemId == R.id.two) {
-                    Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "分享功能开发", Toast.LENGTH_SHORT).show()
                 }
                 false
             }
@@ -224,7 +223,7 @@ class CrimeListFragment : Fragment() {
         }
     }
 
-    private inner class  CrimeAdapter(var notes: List<Note>) :
+    private inner class CrimeAdapter(var notes: List<Note>) :
         RecyclerView.Adapter<CrimeHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : CrimeHolder {
             val view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
