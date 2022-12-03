@@ -208,18 +208,18 @@ class CrimeActivity : AppCompatActivity() {
         edTxtTitle.setText(note.title)
         txtDur.setText(note.duration.toString())
         txtDate.text = formatDate.format(todayDate)
-        if (startHour<10) {
+        if (startHour<10 && startMin >= 10) {
             txtStart.text = "0$startHour:$startMin"
-        } else if (startMin<10) {
+        } else if (startHour >= 10 &&startMin<10) {
             txtStart.text = "$startHour:0$startMin"
         } else if (startHour<10 && startMin<10) {
             txtStart.text = "0$startHour:0$startMin"
         } else {
             txtStart.text = "$startHour:$startMin"
         }
-        if (hour<10) {
+        if (hour<10 && min>=10) {
             txtEnd.text = "0$hour:$min"
-        } else if (min<10) {
+        } else if (hour>=10 && min<10) {
             txtEnd.text = "$hour:0$min"
         } else if (hour<10 && startMin<10) {
             txtEnd.text = "0$hour:0$min"

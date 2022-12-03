@@ -214,18 +214,18 @@ class CrimeListFragment : Fragment() {
             val startHour = start/60
             val startMin = start % 60
 
-            if (startHour<10) {
+            if (startHour<10 && startMin >= 10) {
                 txtStartTime.text = "0$startHour:$startMin"
-            } else if (startMin<10) {
+            } else if (startHour >= 10 &&startMin<10) {
                 txtStartTime.text = "$startHour:0$startMin"
             } else if (startHour<10 && startMin<10) {
                 txtStartTime.text = "0$startHour:0$startMin"
             } else {
                 txtStartTime.text = "$startHour:$startMin"
             }
-            if (hour<10) {
+            if (hour<10 && min>=10) {
                 txtEndTime.text = "0$hour:$min"
-            } else if (min<10) {
+            } else if (hour>=10 && min<10) {
                 txtEndTime.text = "$hour:0$min"
             } else if (hour<10 && startMin<10) {
                 txtEndTime.text = "0$hour:0$min"
@@ -272,18 +272,18 @@ class CrimeListFragment : Fragment() {
                         val startHour = start/60
                         val startMin = start % 60
 
-                        if (startHour<10) {
+                        if (startHour<10 && startMin >= 10) {
                             startTime = "0$startHour:$startMin"
-                        } else if (startMin<10) {
+                        } else if (startHour >= 10 &&startMin<10) {
                             startTime = "$startHour:0$startMin"
                         } else if (startHour<10 && startMin<10) {
                             startTime = "0$startHour:0$startMin"
                         } else {
                             startTime = "$startHour:$startMin"
                         }
-                        if (hour<10) {
+                        if (hour<10 && min>=10) {
                             endTime = "0$hour:$min"
-                        } else if (min<10) {
+                        } else if (hour>=10 && min<10) {
                             endTime = "$hour:0$min"
                         } else if (hour<10 && startMin<10) {
                             endTime = "0$hour:0$min"
