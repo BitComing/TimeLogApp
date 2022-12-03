@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        android:background="@color/red">
+        android:background="#CCE5FF">
 
         <ImageView
             android:layout_width="70dp"
@@ -28,16 +28,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用户名:"
-                android:textSize="20sp"
-                android:textColor="@color/white">
+                android:text="用户名"
+                android:textSize="20sp">
             </TextView>
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:text="Paul"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -52,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@drawable/bg_fragment3_text"
+            android:layout_marginTop="10dp"
             android:id="@+id/tab_set">
 
             <TextView
@@ -81,19 +80,18 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@drawable/bg_fragment3_text"
+            android:layout_marginTop="10dp"
             android:id="@+id/tab_update">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="版本更新"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:textSize="20sp"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="25dp"
-                android:layout_alignParentLeft="true">
-            </TextView>
+                android:gravity="center_vertical"
+                android:text="版本更新"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
 
             <ImageView
                 android:layout_width="25dp"
@@ -105,7 +103,39 @@
             </ImageView>
 
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:id="@+id/tab_tmp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="关于"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_alignParentLeft="true">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/icon_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp">
+                </ImageView>
+
+            </RelativeLayout>
 <!--        <Button-->
 <!--            android:id="@+id/tab_exit"-->
 <!--            android:layout_width="match_parent"-->
@@ -119,4 +149,5 @@
 <!--        </Button>-->
     </LinearLayout>
 
+    </LinearLayout>
 </LinearLayout>
