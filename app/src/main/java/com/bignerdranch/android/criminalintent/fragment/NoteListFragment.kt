@@ -102,6 +102,10 @@ class CrimeListFragment : Fragment() {
 //            callbacks?.onCrimeSelected(crime.id)
 //            true
         }
+        btnFloat.setOnLongClickListener{
+
+            false
+        }
 
 
     }
@@ -194,12 +198,36 @@ class CrimeListFragment : Fragment() {
             this.note = note
             titleTextView.text = this.note.title
             durationTextView.text = this.note.duration.toString()+"min"
-//            val f1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-            val f1 = SimpleDateFormat("HH:mm")
-            val date = this.note.date
-            val startTime = Date(date.time - note.duration * 60 * 1000)
-            txtStartTime.text = f1.format(startTime)
-            txtEndTime.text = f1.format(date)
+
+            val tDate = this.note.date
+            var hour = note.hour
+            var min = note.min
+            if (hour == 0 && min == 0) {
+                hour = tDate.hours
+                min = tDate.minutes
+            }
+            val start = min + hour * 60 - note.duration
+            val startHour = start/60
+            val startMin = start % 60
+
+            if (startHour<10) {
+                txtStartTime.text = "0$startHour:$startMin"
+            } else if (startMin<10) {
+                txtStartTime.text = "$startHour:0$startMin"
+            } else if (startHour<10 && startMin<10) {
+                txtStartTime.text = "0$startHour:0$startMin"
+            } else {
+                txtStartTime.text = "$startHour:$startMin"
+            }
+            if (hour<10) {
+                txtEndTime.text = "0$hour:$min"
+            } else if (min<10) {
+                txtEndTime.text = "$hour:0$min"
+            } else if (hour<10 && startMin<10) {
+                txtEndTime.text = "0$hour:0$min"
+            } else {
+                txtEndTime.text = "$hour:$min"
+            }
         }
         override fun onClick(v: View) {
 //            callbacks?.onCrimeSelected(crime.id)

@@ -20,8 +20,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 private const val ARG_CRIME_ID = "crime_id"
 private const val TAG = "CrimeFragment"
 
@@ -39,9 +38,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     private var callbacks: Callbacks? = null
 
-
     private lateinit var note : Note
-    private lateinit var photoFile: File
 
     private lateinit var edTxtTitle : EditText
     private lateinit var durTxt : EditText
@@ -55,6 +52,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     private lateinit var addBtnList : LinearLayout
 
     private  lateinit var ckbSolved : CheckBox
+    private lateinit var photoFile: File
 //    private lateinit var reportButton : Button
 //    private lateinit var suspectButton: Button
 //    private lateinit var photoButton: ImageButton
@@ -68,11 +66,6 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-
         note = Note()
         val crimeId : UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
         crimeDetailViewModel.loadCrime(crimeId)
@@ -287,31 +280,31 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         }
     }
 
-    private fun getCrimeReport(): String {
-        val solvedString = if(note.isSolved) {
-            getString(R.string.crime_report_solved)
-        } else {
-            getString(R.string.crime_report_unsolved)
-        }
-        val dateString = DateFormat.format(DATE_FORMAT,note.date).toString()
-
-        var suspect = if(note.suspect.isBlank()) {
-            getString(R.string.crime_report_no_suspect)
-        } else {
-            getString(R.string .crime_report_suspect)
-        }
-        return getString(R.string.crime_report,note.title,
-        dateString,solvedString,suspect)
-    }
+//    private fun getCrimeReport(): String {
+//        val solvedString = if(note.isSolved) {
+//            getString(R.string.crime_report_solved)
+//        } else {
+//            getString(R.string.crime_report_unsolved)
+//        }
+//        val dateString = DateFormat.format(DATE_FORMAT,note.date).toString()
+//
+//        var suspect = if(note.suspect.isBlank()) {
+//            getString(R.string.crime_report_no_suspect)
+//        } else {
+//            getString(R.string .crime_report_suspect)
+//        }
+//        return getString(R.string.crime_report,note.title,
+//        dateString,solvedString,suspect)
+//    }
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CrimeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+//        fun newInstance(param1: String, param2: String) =
+//            CrimeFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString(ARG_PARAM1, param1)
+//                    putString(ARG_PARAM2, param2)
+//                }
+//            }
         fun newInstance(crimeId : UUID) :CrimeFragment {
             val args = Bundle().apply{
                 putSerializable(ARG_CRIME_ID,crimeId)

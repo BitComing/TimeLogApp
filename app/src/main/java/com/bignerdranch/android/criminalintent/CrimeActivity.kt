@@ -15,6 +15,8 @@ import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.ExperimentalTime
+import kotlin.time.hours
 
 private const val TAG = "CrimeActivity"
 private const val ARG_CRIME_ID = "crime_id"
@@ -120,18 +122,6 @@ class CrimeActivity : AppCompatActivity() {
         }
         txtDur.addTextChangedListener(durationWatcher)
 
-
-//        ckbSolved.apply {
-//            setOnCheckedChangeListener{_,isChecked ->
-//                note.isSolved = isChecked
-//            }
-//        }
-//        btnDate.setOnClickListener {
-//            DatePickerFragment.newInstance(crime.date).apply {
-//                setTargetFragment(this, REQUEST_DATE)
-//                show(this.requireFragmentManager(), DIALOG_DATE)
-//            }
-//        }
         btnDelete.setOnClickListener{
             crimeDetailViewModel.deleteCrime(note)
             this.finish()
@@ -156,16 +146,26 @@ class CrimeActivity : AppCompatActivity() {
         }
 
         txtStart.setOnClickListener{
-//            val date = Date(note.date.time - note.duration )
-//            val hour = date.hours
-//            val min = date.minutes
-//            dialogTimePicker(hour, min, 0)
+            val date = note.date
 
+            var time = note.hour * 60 + note.min - note.duration
+            var hour = time/60
+            var min = time%60
+
+            if (hour == 0 && min == 0) {
+                hour = date.hours
+                min = date.minutes
+            }
+            dialogTimePicker(hour, min, 0)
         }
         txtEnd.setOnClickListener{
             val date = note.date
-            val hour = date.hours
-            val min = date.minutes
+            var hour = note.hour
+            var min = note.min
+            if (hour == 0 && min == 0) {
+                hour = date.hours
+                min = date.minutes
+            }
             dialogTimePicker(hour, min, 1)
         }
 
@@ -178,29 +178,53 @@ class CrimeActivity : AppCompatActivity() {
                 }
             })
     }
-    // 真正的初始化地方
+
     private fun updateUI() {
 
         val formatDate = SimpleDateFormat("yyyy-MM-dd")
         val fTime = SimpleDateFormat("HH:mm")
         val date = this.note.date
-        note.hour = note.date.hours
-        note.min = note.date.minutes
-        val hour = note.hour
-        val min = note.min
+        var hour = note.hour
+        var min = note.min
 
-        val startTime = Date(date.time - note.duration * 60 * 1000)
+        if (hour == 0 && min == 0) {
+            hour = date.hours
+            min = date.minutes
+        }
+
+        val start = min + hour * 60 - note.duration
+        val startHour = start/60
+        val startMin = start % 60
+
         todayDate = this.note.date
         strTodayDate = todayDate.toString()
 
-
         edTxtTitle.setText(note.title)
         txtDur.setText(note.duration.toString())
-//        txtEnd.text = fTime.format(todayDate)
-        txtEnd.text = fTime.format(todayDate)
         txtDate.text = formatDate.format(todayDate)
-        txtStart.text = fTime.format(startTime)
-        Log.d(TAG,"$hour:$min")
+        if (startHour<10) {
+            txtStart.text = "0$startHour:$startMin"
+        } else if (startMin<10) {
+            txtStart.text = "$startHour:0$startMin"
+        } else if (startHour<10 && startMin<10) {
+            txtStart.text = "0$startHour:0$startMin"
+        } else {
+            txtStart.text = "$startHour:$startMin"
+        }
+        if (hour<10) {
+            txtEnd.text = "0$hour:$min"
+        } else if (min<10) {
+            txtEnd.text = "$hour:0$min"
+        } else if (hour<10 && startMin<10) {
+            txtEnd.text = "0$hour:0$min"
+        } else {
+            txtEnd.text = "$hour:$min"
+        }
+
+
+//        val startTime = Date(date.time - note.duration * 60 * 1000)
+//        txtEnd.text = fTime.format(todayDate)
+//        txtStart.text = fTime.format(startTime)
 
 //        ckbSolved.apply {
 //            isChecked = note.isSolved
@@ -230,32 +254,19 @@ class CrimeActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         btSure.setOnClickListener{
-//            val formatDate = SimpleDateFormat("yyyy-MM-dd")
-//            val tmpDate = formatDate.format(todayDate).toString()
+            val nHour = timePicker.hour
+            val nMin = timePicker.minute
 
-            val hour = timePicker.hour
-            val min = timePicker.minute
-            val time = "$hour:$min"
-
-//            crimeDetailViewModel.noteLiveData.observe(
-//                this,
-//                androidx.lifecycle.Observer { note1 ->
-//                    note1?.let {
-//                        it.hour = hour
-//                        it.min = min
-//                        this.note = it
-//                        updateUI()
-//                    }
-//                })
-//            val f = SimpleDateFormat("HH:mm")
-//            txtEnd.text = time
-//
-//            val tim = f.parse(txtEnd.text.toString()).time - f.parse(txtStart.text.toString()).time
-//            note.duration = tim.toInt()
-//            txtDur.setText(f.format(note.duration))
-
-//            note.date =
-//            Log.d(TAG, f.parse(txtEnd.text.toString()).time.toString())
+            when(flag) {
+                0 ->{
+                    note.duration += (hour - nHour) * 60 + min - nMin
+                }
+                1->{
+                    note.hour = nHour
+                    note.min = nMin
+                }
+            }
+            updateUI()
             dialog.dismiss()
         }
     }
