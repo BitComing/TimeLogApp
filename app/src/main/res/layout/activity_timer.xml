@@ -5,7 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".TimerActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="计时器"
+        android:textSize="50dp"/>
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"
@@ -13,15 +19,18 @@
         android:textSize="50dp"
         android:layout_gravity="center" />
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开始计时"/>
-    <Button
         android:id="@+id/bt_stop_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="暂停计时"/>
     <Button
+        android:id="@+id/bt_start_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始计时"/>
+
+    <Button
+        android:id="@+id/bt_restart_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="复位"/>

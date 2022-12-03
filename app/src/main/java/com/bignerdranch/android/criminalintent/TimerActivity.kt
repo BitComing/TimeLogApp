@@ -8,6 +8,8 @@ import android.widget.Chronometer
 class TimerActivity : AppCompatActivity() {
     private lateinit var timer: Chronometer
     private lateinit var btStop: Button
+    private lateinit var btStart: Button
+    private lateinit var btRestart: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +18,9 @@ class TimerActivity : AppCompatActivity() {
 
         timer = findViewById(R.id.timer)
         btStop = findViewById(R.id.bt_stop_timer)
+        btStart = findViewById(R.id.bt_start_timer)
+        btRestart = findViewById(R.id.bt_restart_timer)
+
     }
 
     override fun onStart() {
@@ -23,6 +28,9 @@ class TimerActivity : AppCompatActivity() {
         timer.start()
         btStop.setOnClickListener{
             timer.stop()
+        }
+        btStart.setOnClickListener{
+            timer.start()
         }
     }
 }
