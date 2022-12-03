@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CriminalIntent"
         tools:targetApi="31">
         <activity
+            android:name=".TimerActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
