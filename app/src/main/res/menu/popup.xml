@@ -5,6 +5,6 @@
         android:title="删除" />
 
     <item
-        android:id="@+id/two"
-        android:title="Two" />
+        android:id="@+id/share"
+        android:title="share" />
 </menu>

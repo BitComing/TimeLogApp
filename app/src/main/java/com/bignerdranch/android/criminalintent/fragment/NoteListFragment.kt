@@ -214,7 +214,7 @@ class CrimeListFragment : Fragment() {
                 if (it.itemId == R.id.menu_delete) {
                     Toast.makeText(activity, "删除功能开发", Toast.LENGTH_SHORT).show()
                 }
-                if (it.itemId == R.id.two) {
+                if (it.itemId == R.id.share) {
                     Toast.makeText(activity, "分享功能开发", Toast.LENGTH_SHORT).show()
                 }
                 false
