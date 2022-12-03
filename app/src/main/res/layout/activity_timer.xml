@@ -11,27 +11,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="计时器"
-        android:textSize="50dp"/>
+        android:textSize="50dp"
+        android:layout_marginBottom="10dp"/>
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
-        android:layout_gravity="center" />
+        android:textSize="60dp"
+        android:fontFamily="serif"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"/>
     <Button
         android:id="@+id/bt_stop_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="暂停计时"/>
+        style="@style/bt_normal_style"
+        android:text="暂停计时"
+        android:layout_marginBottom="10dp"/>
     <Button
         android:id="@+id/bt_start_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="开始计时"/>
+        style="@style/bt_normal_style"
+        android:text="开始计时"
+        android:layout_marginBottom="10dp"/>
 
     <Button
         android:id="@+id/bt_create_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/bt_normal_style"
         android:text="创建"/>
 </LinearLayout>
