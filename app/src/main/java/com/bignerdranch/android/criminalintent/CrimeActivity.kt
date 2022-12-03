@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
 //import com.bnuz.example.criminalintentRoom.CrimeFragment
 import java.io.File
 import java.text.SimpleDateFormat

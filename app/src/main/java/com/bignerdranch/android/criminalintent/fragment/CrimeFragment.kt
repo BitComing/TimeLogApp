@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.*
+import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
