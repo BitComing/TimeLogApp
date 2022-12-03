@@ -15,6 +15,9 @@ class CrimeListViewModel : ViewModel() {
     fun addCrime(note : Note){
         crimeRepository.addCrime(note)
     }
+    fun deleteNote(note : Note) {
+        crimeRepository.deleteCrime(note)
+    }
 
     fun findCrime(str: String) : LiveData<List<Note>> {
         return crimeRepository.findCrime(str)

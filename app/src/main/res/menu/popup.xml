@@ -3,8 +3,10 @@
     <item
         android:id="@+id/menu_delete"
         android:title="删除" />
-
+    <item
+        android:id="@+id/menu_copy"
+        android:title="复制"/>
     <item
         android:id="@+id/share"
-        android:title="share" />
+        android:title="分享" />
 </menu>

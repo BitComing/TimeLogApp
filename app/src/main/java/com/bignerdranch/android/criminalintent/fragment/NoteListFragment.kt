@@ -1,10 +1,13 @@
 package com.bignerdranch.android.criminalintent.fragment
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -240,11 +243,61 @@ class CrimeListFragment : Fragment() {
             val popup = PopupMenu(this@CrimeListFragment.activity,p0)
             popup.menuInflater.inflate(R.menu.popup, popup.menu)
             popup.setOnMenuItemClickListener {
-                if (it.itemId == R.id.menu_delete) {
-                    Toast.makeText(activity, "删除功能开发", Toast.LENGTH_SHORT).show()
-                }
-                if (it.itemId == R.id.share) {
-                    Toast.makeText(activity, "分享功能开发", Toast.LENGTH_SHORT).show()
+                when(it.itemId) {
+                    R.id.menu_delete -> {
+                        crimeListViewModel.deleteNote(note)
+                        Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.menu_copy -> {
+
+                        //clipData中的this就是需要复制的文本
+//                        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//                        val clipData = ClipData.newPlainText("", "Hello")
+//                        cm.setPrimaryClip(clipData)
+                        Toast.makeText(activity, "复制成功", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.share -> {
+                        val content = note.title
+                        var startTime = ""
+                        var endTime = ""
+
+                        val tDate = this.note.date
+                        var hour = note.hour
+                        var min = note.min
+                        if (hour == 0 && min == 0) {
+                            hour = tDate.hours
+                            min = tDate.minutes
+                        }
+                        val start = min + hour * 60 - note.duration
+                        val startHour = start/60
+                        val startMin = start % 60
+
+                        if (startHour<10) {
+                            startTime = "0$startHour:$startMin"
+                        } else if (startMin<10) {
+                            startTime = "$startHour:0$startMin"
+                        } else if (startHour<10 && startMin<10) {
+                            startTime = "0$startHour:0$startMin"
+                        } else {
+                            startTime = "$startHour:$startMin"
+                        }
+                        if (hour<10) {
+                            endTime = "0$hour:$min"
+                        } else if (min<10) {
+                            endTime = "$hour:0$min"
+                        } else if (hour<10 && startMin<10) {
+                            endTime = "0$hour:0$min"
+                        } else {
+                            endTime = "$hour:$min"
+                        }
+
+
+                        val intent = Intent(Intent.ACTION_SEND)
+                        intent.type = "text/plain"
+                        intent.putExtra(Intent.EXTRA_TEXT, "$startTime-$endTime $content")
+                        startActivity(Intent.createChooser(intent, "$startTime-$endTime"))
+                        Toast.makeText(activity, "分享成功", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 false
             }
@@ -252,6 +305,8 @@ class CrimeListFragment : Fragment() {
             return false
         }
     }
+
+
 
     private inner class CrimeAdapter(var notes: List<Note>) :
         RecyclerView.Adapter<CrimeHolder>(){
