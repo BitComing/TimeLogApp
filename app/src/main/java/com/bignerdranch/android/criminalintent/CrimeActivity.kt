@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -32,12 +33,13 @@ class CrimeActivity : AppCompatActivity() {
     private lateinit var txtDate: TextView
 
     private lateinit var edTxtTitle : EditText
-    private lateinit var durTxt : EditText
+    private lateinit var txtDur : EditText
 
-    private lateinit var nowTxt : TextView
+    private lateinit var txtEnd : TextView
     private lateinit var txtStart: TextView
 
-    private lateinit var btnDate : Button
+//    private lateinit var btnDate : Button
+//    private  lateinit var ckbSolved : CheckBox
     private lateinit var btnDelete: Button
     private lateinit var btnBack: Button
     private lateinit var btnAdd15 : Button
@@ -45,7 +47,11 @@ class CrimeActivity : AppCompatActivity() {
     private lateinit var btnAdd60 : Button
     private lateinit var addBtnList : LinearLayout
 
-    private  lateinit var ckbSolved : CheckBox
+//    private lateinit var startTime: Date
+//    private lateinit var endTime: Date
+    private lateinit var todayDate: Date
+    private lateinit var strTodayDate: String
+
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
     }
@@ -58,11 +64,12 @@ class CrimeActivity : AppCompatActivity() {
         txtDate = findViewById(R.id.txt_date)
 
         edTxtTitle = findViewById(R.id.crime_title)
-        durTxt = findViewById(R.id.edit_duration)
-        nowTxt = findViewById(R.id.edit_now_time)
+        txtDur = findViewById(R.id.edit_duration)
+        txtEnd = findViewById(R.id.edit_now_time)
         txtStart = findViewById(R.id.edit_start_time)
 
 //        btnDate = findViewById(R.id.crime_date)
+//        ckbSolved = findViewById(R.id.crime_solved)
         btnDelete = findViewById(R.id.btn_delete)
         btnBack = findViewById(R.id.btn_back)
 
@@ -71,7 +78,7 @@ class CrimeActivity : AppCompatActivity() {
         btnAdd60 = findViewById(R.id.btn_add_60)
         addBtnList = findViewById(R.id.add_time_btn)
 
-//        ckbSolved = findViewById(R.id.crime_solved)
+
 
         note = Note()
         val bundle = this.getIntent().getExtras()
@@ -80,9 +87,12 @@ class CrimeActivity : AppCompatActivity() {
 
         val f1 = SimpleDateFormat("HH:mm")
         val formatDate = SimpleDateFormat("yyyy-MM-dd")
-        val date = this.note.date
-        nowTxt.setText(f1.format(date))
-        txtDate.text=formatDate.format(date)
+        todayDate = this.note.date
+        strTodayDate = todayDate.toString()
+
+        txtEnd.setText(f1.format(todayDate))
+        txtDate.text=formatDate.format(todayDate)
+
     }
 
     override fun onStart() {
@@ -115,7 +125,7 @@ class CrimeActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
             }
         }
-        durTxt.addTextChangedListener(durationWatcher)
+        txtDur.addTextChangedListener(durationWatcher)
 
 
 //        ckbSolved.apply {
@@ -137,27 +147,33 @@ class CrimeActivity : AppCompatActivity() {
             this.finish()
         }
         btnAdd15.setOnClickListener{
-            var num = Integer.parseInt(durTxt.text.toString())
+            var num = Integer.parseInt(txtDur.text.toString())
             num+=15
-            durTxt.setText(num.toString())
+            txtDur.setText(num.toString())
         }
         btnAdd30.setOnClickListener{
-            var num = Integer.parseInt(durTxt.text.toString())
+            var num = Integer.parseInt(txtDur.text.toString())
             num+=30
-            durTxt.setText(num.toString())
+            txtDur.setText(num.toString())
         }
         btnAdd60.setOnClickListener{
-            var num = Integer.parseInt(durTxt.text.toString())
+            var num = Integer.parseInt(txtDur.text.toString())
             num+=60
-            durTxt.setText(num.toString())
+            txtDur.setText(num.toString())
         }
 
         txtStart.setOnClickListener{
+//            val date = Date(note.date.time - note.duration )
+//            val hour = date.hours
+//            val min = date.minutes
+//            dialogTimePicker(hour, min, 0)
 
-            dialogTimePicker()
         }
-        nowTxt.setOnClickListener{
-            dialogTimePicker()
+        txtEnd.setOnClickListener{
+            val date = note.date
+            val hour = date.hours
+            val min = date.minutes
+            dialogTimePicker(hour, min, 1)
         }
 
         crimeDetailViewModel.noteLiveData.observe(
@@ -171,13 +187,13 @@ class CrimeActivity : AppCompatActivity() {
     }
     private fun updateUI() {
         edTxtTitle.setText(note.title)
-        durTxt.setText(note.duration.toString())
+        txtDur.setText(note.duration.toString())
 
         val f1 = SimpleDateFormat("HH:mm")
         val date = this.note.date
         val startTime = Date(date.time - note.duration * 60 * 1000)
         txtStart.setText(f1.format(startTime))
-        nowTxt.setText(f1.format(date))
+        txtEnd.setText(f1.format(date))
 //        btnDate.text = crime.date.toString()
 //        ckbSolved.apply {
 //            isChecked = note.isSolved
@@ -185,7 +201,7 @@ class CrimeActivity : AppCompatActivity() {
 //        }
     }
     @SuppressLint("NewApi")
-    private fun dialogTimePicker() {
+    private fun dialogTimePicker(hour: Int, min: Int, flag: Int) {
         val builder = AlertDialog.Builder(this)
         val inflater = LayoutInflater.from(this)
         // 包含新的api
@@ -195,20 +211,39 @@ class CrimeActivity : AppCompatActivity() {
         val btCancel = view.findViewById(R.id.bt_cancel_time) as Button
         val btSure = view.findViewById(R.id.bt_sure_time) as Button
 
+        timePicker.hour = hour
+        timePicker.minute = min
+        timePicker.setIs24HourView(true)
 
         val dialog = builder.create()
         dialog.show()
         dialog.getWindow()?.setContentView(view)
 
         btCancel.setOnClickListener{
-            dialog.hide()
+            dialog.dismiss()
         }
         btSure.setOnClickListener{
-            val hour = timePicker.hour
-            val min = timePicker.minute
-            dialog.hide()
+//            val formatDate = SimpleDateFormat("yyyy-MM-dd")
+//            val tmpDate = formatDate.format(todayDate).toString()
+//
+//            val hour = timePicker.hour
+//            val min = timePicker.minute
+//            val time = "$hour:$min"
+//
+//            val f = SimpleDateFormat("HH:mm")
+//            txtEnd.text = time
+//
+//            val tim = f.parse(txtEnd.text.toString()).time - f.parse(txtStart.text.toString()).time
+//            note.duration = tim.toInt()
+//            txtDur.setText(f.format(note.duration))
+
+//            note.date =
+//            Log.d(TAG, f.parse(txtEnd.text.toString()).time.toString())
+            dialog.dismiss()
         }
     }
+
+
     override fun onDestroy() {
         super.onDestroy()
         crimeDetailViewModel.saveCrime(note)
