@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bignerdranch.android.criminalintent.Note
 import com.bignerdranch.android.criminalintent.bean.Todo
 
-@Database(entities = [Note::class, Todo::class], version = 3)
+@Database(entities = [Note::class, Todo::class], version = 4)
 //通过注解实现了数据的类型转换，类的实现在CrimeTypeConverters上
 @TypeConverters(CrimeTypeConverters::class)
 abstract class CrimeDatabase : RoomDatabase(){
@@ -33,15 +33,15 @@ val migration_2_3 = object : Migration(2, 3) {
         )
     }
 }
-//val migration_3_4 = object : Migration(3, 4) {
-//    override fun migrate(database: SupportSQLiteDatabase) {
-//        database.execSQL(
-//            "CREATE TABLE IF NOT EXISTS todos " +
-//                    "(`tid` TEXT PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-//                    "`content` TEXT, " +
-//                    "`nextKey` BOOLEAN)"
-//        )
-//    }
-//}
+val migration_3_4 = object : Migration(3, 4) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "ALTER TABLE CRIME ADD COLUMN hour INT"
+        )
+        database.execSQL(
+            "ALTER TABLE CRIME ADD COLUMN min INT"
+        )
+    }
+}
 
 

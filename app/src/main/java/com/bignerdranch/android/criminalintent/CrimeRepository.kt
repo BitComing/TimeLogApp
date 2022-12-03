@@ -7,6 +7,7 @@ import com.bignerdranch.android.criminalintent.bean.Todo
 import com.bignerdranch.android.criminalintent.database.CrimeDatabase
 import com.bignerdranch.android.criminalintent.database.migration_1_2
 import com.bignerdranch.android.criminalintent.database.migration_2_3
+import com.bignerdranch.android.criminalintent.database.migration_3_4
 //import com.bignerdranch.android.criminalintent.database.migration_3_4
 import java.util.*
 import java.util.concurrent.Executors
@@ -20,7 +21,7 @@ class CrimeRepository private constructor(context: Context){
         DATABASE_NAME
     ).addMigrations(migration_1_2)
         .addMigrations(migration_2_3)
-//        .addMigrations(migration_3_4)
+        .addMigrations(migration_3_4)
         .build()
 
     private val crimeDao = database.crimeDao()
