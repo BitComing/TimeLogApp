@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CriminalIntent</string>
+    <string name="app_name">TimeLog</string>
     <string name="crime_title_hint">这段时间做了什么？</string>
     <string name="crime_details_label">具体内容</string>
     <string name="crime_solved_label">解决</string>
