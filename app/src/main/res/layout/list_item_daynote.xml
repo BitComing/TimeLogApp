@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/linear_day"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,13 +16,13 @@
             android:textSize="30dp"
             android:fontFamily="serif"
             android:layout_marginLeft="20dp"/>
-        <TextView
-            android:id="@+id/txt_fold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:typeface="normal"
-            android:text="折叠/展开"/>
+<!--        <TextView-->
+<!--            android:id="@+id/txt_fold"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="100dp"-->
+<!--            android:typeface="normal"-->
+<!--            android:text="折叠/展开"/>-->
     </LinearLayout>
     <TextView
         android:id="@+id/txt_total_time"

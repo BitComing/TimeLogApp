@@ -325,7 +325,8 @@ class CrimeListFragment : Fragment() {
     // DayNote的RecyclerView
     private inner class DayNoteHolder(view: View):RecyclerView.ViewHolder(view) {
         val textDay: TextView = itemView.findViewById(R.id.text_day)
-        val textFold: TextView = itemView.findViewById(R.id.txt_fold)
+//        val textFold: TextView = itemView.findViewById(R.id.txt_fold)
+        val linearDay: LinearLayout = itemView.findViewById(R.id.linear_day)
         val txtTotalTime: TextView = itemView.findViewById(R.id.txt_total_time)
         var recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
     }
@@ -340,7 +341,7 @@ class CrimeListFragment : Fragment() {
             val notes: MutableList<Note> = ArrayList()
 
             holder.textDay.text = date
-            holder.textFold.setOnClickListener {
+            holder.linearDay.setOnClickListener {
                 when(holder.recyclerView.visibility) {
                     View.VISIBLE -> holder.recyclerView.visibility=View.GONE
                     else -> holder.recyclerView.visibility=View.VISIBLE

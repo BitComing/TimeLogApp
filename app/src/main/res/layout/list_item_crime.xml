@@ -20,24 +20,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="14dp"
     android:orientation="horizontal"
 xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:id="@+id/show_time"
         android:orientation="vertical"
         android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"
-        android:background="@drawable/border_crime_item">
+        android:gravity="center">
         <TextView
             android:id="@+id/text_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="end"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="serif"/>
         <TextView
@@ -45,14 +45,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="start"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:fontFamily="serif"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/show_content"
         android:orientation="vertical"
         android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:layout_constraintStart_toEndOf="@id/show_time"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -71,7 +71,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="duration"
-            android:textSize="20dp"
+            android:textSize="24dp"
+            android:textStyle="bold"
             android:fontFamily="serif"
             android:layout_marginLeft="10dp"/>
         <TextView
@@ -81,9 +82,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="Content"
-            android:textSize="30dp"
+            android:textSize="26dp"
             android:maxLines="1"
-            android:fontFamily="sans-serif"
             android:layout_marginLeft="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
