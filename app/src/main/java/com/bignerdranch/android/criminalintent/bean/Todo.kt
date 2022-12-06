@@ -8,6 +8,7 @@ import java.util.*
 data class Todo (
     @PrimaryKey
     val tid: UUID = UUID.randomUUID(),
+    var date: Date = Date(),
     var content: String = "",
     var isSolved: Boolean = false,
 )
