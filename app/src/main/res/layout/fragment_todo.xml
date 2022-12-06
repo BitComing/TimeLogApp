@@ -12,6 +12,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="#ffffff"
         android:layout_weight="1"/>
 
     <LinearLayout
