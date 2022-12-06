@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recyclerview_todo"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"/>
 
     <LinearLayout
@@ -30,6 +31,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
+            android:inputType="textNoSuggestions"
             android:hint="在这里输入待办">
         </EditText>
 

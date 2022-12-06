@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.criminalintent.R
+import com.bignerdranch.android.criminalintent.TimerActivity
 import com.bignerdranch.android.criminalintent.bean.Msg
 import com.bignerdranch.android.criminalintent.bean.Todo
 import com.bignerdranch.android.criminalintent.viewmodel.CrimeListViewModel
@@ -39,14 +42,14 @@ class TodoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view =  inflater.inflate(R.layout.fragment_todo, container, false)
+        val view =  inflater.inflate(R.layout.fragment_todo, container, false)
         btSend = view.findViewById(R.id.bt_send)
         editTodo = view.findViewById(R.id.edit_todo)
 
         recyclerView = view.findViewById(R.id.recyclerview_todo)
-
-        recyclerView.layoutManager = LinearLayoutManager(this.activity)
-
+        val manager = LinearLayoutManager(this.activity)
+        manager.stackFromEnd = true
+        recyclerView.layoutManager = manager
         recyclerView.adapter = TodoAdapter(todolist)
 
         return view
@@ -58,6 +61,7 @@ class TodoFragment : Fragment() {
             val todoContent = editTodo.text.toString()
             val todo = Todo(UUID.randomUUID(), Date(), todoContent, false)
             todoListViewModel.addTodo(todo)
+            editTodo.setText("")
         }
 
         todoListViewModel.noteListLiveData.observe(
@@ -72,8 +76,13 @@ class TodoFragment : Fragment() {
 
     private inner class TodoHolder(view: View): RecyclerView.ViewHolder(view) {
         private val textTodo = view.findViewById(R.id.text_todo) as TextView
+        private val linearTodo = view.findViewById(R.id.linear_todo) as LinearLayout
         fun bind(todo: Todo) {
             textTodo.text = todo.content
+            linearTodo.setOnClickListener{
+                val intent = Intent(this@TodoFragment.context, TimerActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -91,11 +100,11 @@ class TodoFragment : Fragment() {
         }
     }
 
-    init {
-        todolist += Todo(UUID.randomUUID(), Date(),"test",false)
-        todolist += Todo(UUID.randomUUID(),Date(),"test",false)
-        todolist += Todo(UUID.randomUUID(),Date(),"test",false)
-        todolist += Todo(UUID.randomUUID(),Date(),"test",false)
-    }
+//    init {
+//        todolist += Todo(UUID.randomUUID(), Date(),"test",false)
+//        todolist += Todo(UUID.randomUUID(),Date(),"test",false)
+//        todolist += Todo(UUID.randomUUID(),Date(),"test",false)
+//        todolist += Todo(UUID.randomUUID(),Date(),"test",false)
+//    }
 
 }
