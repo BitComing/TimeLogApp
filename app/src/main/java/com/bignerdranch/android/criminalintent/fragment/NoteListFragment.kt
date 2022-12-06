@@ -38,6 +38,7 @@ class CrimeListFragment : Fragment() {
 
 //    private lateinit var editSearch: EditText
     private lateinit var btnFloat : FloatingActionButton
+    private lateinit var linearQuote: LinearLayout
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
@@ -73,6 +74,8 @@ class CrimeListFragment : Fragment() {
         dayNoteRecyclerView.adapter=dayNoteAdapter
 
         btnFloat = view.findViewById(R.id.btn_float)
+        linearQuote = view.findViewById(R.id.linear_quote)
+
         return view
     }
 
@@ -109,6 +112,9 @@ class CrimeListFragment : Fragment() {
             val intent = Intent(this.activity, TimerActivity::class.java)
             startActivity(intent)
             false
+        }
+        linearQuote.setOnClickListener{
+            Toast.makeText(this.context, "每日名言开发中", Toast.LENGTH_SHORT).show()
         }
 
 

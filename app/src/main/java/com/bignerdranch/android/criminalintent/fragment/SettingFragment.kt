@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bignerdranch.android.criminalintent.R
 import com.bignerdranch.android.criminalintent.SettingActivity
 
 class SettingFragment : Fragment() {
     private lateinit var linearSetting: RelativeLayout
+    private lateinit var layoutUpdate: RelativeLayout
+    private lateinit var layoutAbout: RelativeLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +23,8 @@ class SettingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_setting, container, false)
         linearSetting = view.findViewById(R.id.linear_setting)
+        layoutUpdate = view.findViewById(R.id.tab_update)
+        layoutAbout = view.findViewById(R.id.tab_tmp)
         return view
     }
 
@@ -28,6 +33,12 @@ class SettingFragment : Fragment() {
         linearSetting.setOnClickListener{
             val intent = Intent(this@SettingFragment.activity, SettingActivity::class.java)
             startActivity(intent)
+        }
+        layoutUpdate.setOnClickListener{
+            Toast.makeText(this.context,"暂无更新",Toast.LENGTH_SHORT).show()
+        }
+        layoutAbout.setOnClickListener{
+            Toast.makeText(this.context,"未开发",Toast.LENGTH_SHORT).show()
         }
     }
 }

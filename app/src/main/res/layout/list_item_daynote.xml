@@ -14,8 +14,7 @@
             android:layout_height="wrap_content"
             android:text="2022/11/29"
             android:textSize="30dp"
-            android:fontFamily="serif"
-            android:layout_marginLeft="20dp"/>
+            android:fontFamily="serif"/>
 <!--        <TextView-->
 <!--            android:id="@+id/txt_fold"-->
 <!--            android:layout_width="wrap_content"-->
@@ -28,7 +27,6 @@
         android:id="@+id/txt_total_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:text="本日已记录时间"
         android:fontFamily="serif"/>
 
