@@ -19,6 +19,9 @@ class TodoListViewModel : ViewModel() {
     fun deleteTodo(todo : Todo) {
         crimeRepository.deleteTodo(todo)
     }
+    fun deleteTodoId(tid: String) {
+        crimeRepository.deleteTodoId(tid)
+    }
 
 //    fun findCrime(str: String) : LiveData<List<Note>> {
 //        return crimeRepository.findCrime(str)

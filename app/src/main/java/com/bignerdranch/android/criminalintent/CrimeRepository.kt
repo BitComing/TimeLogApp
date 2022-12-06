@@ -62,6 +62,11 @@ class CrimeRepository private constructor(context: Context){
             todoDao.deleteTodo(todo)
         }
     }
+    fun deleteTodoId(tid: String) {
+        executor.execute {
+            todoDao.deleteTodoId(tid)
+        }
+    }
 
 
 //    fun getPhotoFile(crime: Crime): File = File(filesDir, crime.photoFileName)

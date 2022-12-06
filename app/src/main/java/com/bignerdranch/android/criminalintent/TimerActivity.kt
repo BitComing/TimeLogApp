@@ -21,6 +21,7 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var btCreate: Button
 
     private var tmpContent: String? = null
+    private var tmpId: String? = null
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
@@ -41,7 +42,7 @@ class TimerActivity : AppCompatActivity() {
 
         val bundle = this.getIntent().getExtras()
         tmpContent = bundle?.getSerializable("todo_content") as String?
-
+        tmpId = bundle?.getSerializable("todo_id") as String?
     }
 
     override fun onStart() {
@@ -56,6 +57,8 @@ class TimerActivity : AppCompatActivity() {
         btCreate.setOnClickListener{
             val note = Note()
             crimeListViewModel.addCrime(note)
+
+            tmpId?.let { it1 -> todoListViewModel.deleteTodoId(it1) }
 
             val timeShow = timer.text.toString().split(":")
 //            Log.d(TAG,""+timeShow[0]+" "+timeShow[1])

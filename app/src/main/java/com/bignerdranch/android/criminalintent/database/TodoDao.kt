@@ -26,6 +26,9 @@ interface TodoDao {
     @Delete
     fun deleteTodo(note: Todo)
 
+    @Query("Delete From todos where tid =(:tid)")
+    fun deleteTodoId(tid: String)
+
 //    @Query("SELECT DISTINCT date FROM crime order by date desc")
 //    fun getAllDates(): LiveData<List<Date>>
 

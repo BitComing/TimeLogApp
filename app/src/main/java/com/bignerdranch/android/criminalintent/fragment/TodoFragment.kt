@@ -82,7 +82,7 @@ class TodoFragment : Fragment() {
             linearTodo.setOnClickListener{
                 Intent(this@TodoFragment.context, TimerActivity::class.java).let {
                     it.putExtra("todo_content", todo.content)
-                    it.putExtra("todo_id",todo.tid)
+                    it.putExtra("todo_id",todo.tid.toString())
                     startActivity(it)
                 }
             }
