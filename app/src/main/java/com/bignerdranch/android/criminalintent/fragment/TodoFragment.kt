@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -64,6 +62,7 @@ class TodoFragment : Fragment() {
             editTodo.setText("")
         }
 
+
         todoListViewModel.noteListLiveData.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { todos ->
@@ -76,12 +75,18 @@ class TodoFragment : Fragment() {
 
     private inner class TodoHolder(view: View): RecyclerView.ViewHolder(view) {
         private val textTodo = view.findViewById(R.id.text_todo) as TextView
-        private val linearTodo = view.findViewById(R.id.linear_todo) as LinearLayout
+        private val linearTodo = view.findViewById(R.id.linear_todo) as ConstraintLayout
+        private val checkBox = view.findViewById<CheckBox>(R.id.checkbox)
         fun bind(todo: Todo) {
             textTodo.text = todo.content
             linearTodo.setOnClickListener{
                 val intent = Intent(this@TodoFragment.context, TimerActivity::class.java)
                 startActivity(intent)
+            }
+            checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    todoListViewModel.deleteTodo(todo)
+                }
             }
         }
     }
