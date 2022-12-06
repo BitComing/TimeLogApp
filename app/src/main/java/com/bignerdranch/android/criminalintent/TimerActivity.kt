@@ -7,7 +7,9 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Chronometer
 import androidx.lifecycle.ViewModelProvider
+import com.bignerdranch.android.criminalintent.fragment.TodoFragment
 import com.bignerdranch.android.criminalintent.viewmodel.CrimeListViewModel
+import com.bignerdranch.android.criminalintent.viewmodel.TodoListViewModel
 
 private const val ARG_CRIME_ID = "crime_id"
 
@@ -22,6 +24,9 @@ class TimerActivity : AppCompatActivity() {
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
+    }
+    private val todoListViewModel: TodoListViewModel by lazy {
+        ViewModelProvider(this).get(TodoListViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,14 +61,15 @@ class TimerActivity : AppCompatActivity() {
 //            Log.d(TAG,""+timeShow[0]+" "+timeShow[1])
 
             val duration = timeShow[0].toInt()
-            val intent = Intent(this, CrimeActivity::class.java)
-
-            if (tmpContent != null) {
-                intent.putExtra("todo_content",tmpContent)
+            Intent(this, CrimeActivity::class.java).let {
+               if (tmpContent != null) {
+                   it.putExtra("todo_content",tmpContent)
+               }
+               it.putExtra(ARG_CRIME_ID,note.id)
+               it.putExtra("duration",duration)
+               startActivity(it)
             }
-            intent.putExtra(ARG_CRIME_ID,note.id)
-            intent.putExtra("duration",duration)
-            startActivity(intent)
+
             this.finish()
         }
     }
