@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.criminalintent.R
 import com.bignerdranch.android.criminalintent.bean.Msg
 
@@ -22,6 +23,10 @@ class TodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_todo, container, false)
+    }
+
+    private inner class TodoHolder(view: View): RecyclerView.ViewHolder(view) {
+
     }
 
 }

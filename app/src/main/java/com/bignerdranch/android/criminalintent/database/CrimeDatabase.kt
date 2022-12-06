@@ -8,12 +8,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bignerdranch.android.criminalintent.Note
 import com.bignerdranch.android.criminalintent.bean.Todo
 
-@Database(entities = [Note::class, Todo::class], version = 4)
+@Database(entities = [Note::class, Todo::class], version = 5)
 //通过注解实现了数据的类型转换，类的实现在CrimeTypeConverters上
 @TypeConverters(NoteTypeConverters::class)
 abstract class CrimeDatabase : RoomDatabase(){
     abstract fun crimeDao(): CrimeDao
-    abstract fun TodoDao(): TodoDao
+    abstract fun todoDao(): TodoDao
 }
 
 // 迁移数据库
@@ -45,13 +45,13 @@ val migration_3_4 = object : Migration(3, 4) {
 }
 
 
-//val migration_4_5 = object : Migration(4, 5) {
-//    override fun migrate(database: SupportSQLiteDatabase) {
-//        database.execSQL(
-//            "CREATE TABLE `todos` (`tId` TEXT NOT NULL, `date` TEXT, `content` TEXT, `isSolved` INTEGER, PRIMARY KEY(`tId`))"
-//        )
-//    }
-//}
+val migration_4_5 = object : Migration(4, 5) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "CREATE TABLE `todos` (`tId` TEXT NOT NULL, `date` TEXT, `content` TEXT, `isSolved` INTEGER, PRIMARY KEY(`tId`))"
+        )
+    }
+}
 
 
 
