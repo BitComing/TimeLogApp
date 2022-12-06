@@ -23,10 +23,11 @@ class TodoListViewModel : ViewModel() {
         crimeRepository.deleteTodoId(tid)
     }
 
-//    fun findCrime(str: String) : LiveData<List<Note>> {
-//        return crimeRepository.findCrime(str)
-//    }
     fun getAllDates() : LiveData<List<Date>> {
         return crimeRepository.getAllDates()
     }
+
+//    fun findCrime(str: String) : LiveData<List<Note>> {
+//        return crimeRepository.findCrime(str)
+//    }
 }

@@ -13,12 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.criminalintent.R
 import com.bignerdranch.android.criminalintent.TimerActivity
-import com.bignerdranch.android.criminalintent.bean.Msg
 import com.bignerdranch.android.criminalintent.bean.Todo
-import com.bignerdranch.android.criminalintent.viewmodel.CrimeListViewModel
 import com.bignerdranch.android.criminalintent.viewmodel.TodoListViewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 class TodoFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
