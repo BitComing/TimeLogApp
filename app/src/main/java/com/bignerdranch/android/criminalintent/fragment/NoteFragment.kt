@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.*
+import com.bignerdranch.android.criminalintent.bean.Note
 import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
 import java.io.File
 import java.text.SimpleDateFormat

@@ -5,18 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.bignerdranch.android.criminalintent.bean.Note
 import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
 //import com.bnuz.example.criminalintentRoom.CrimeFragment
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.time.ExperimentalTime
-import kotlin.time.hours
 
 private const val TAG = "CrimeActivity"
 private const val ARG_CRIME_ID = "crime_id"

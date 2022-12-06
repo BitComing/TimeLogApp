@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.bignerdranch.android.criminalintent.Note
+import com.bignerdranch.android.criminalintent.bean.Note
 import com.bignerdranch.android.criminalintent.bean.Todo
 
 @Database(entities = [Note::class, Todo::class], version = 5)

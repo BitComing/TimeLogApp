@@ -3,7 +3,6 @@ package com.bignerdranch.android.criminalintent.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.bignerdranch.android.criminalintent.CrimeRepository
-import com.bignerdranch.android.criminalintent.Note
 import com.bignerdranch.android.criminalintent.bean.Todo
 import java.util.*
 

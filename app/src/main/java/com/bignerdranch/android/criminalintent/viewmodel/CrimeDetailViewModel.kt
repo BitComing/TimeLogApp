@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bignerdranch.android.criminalintent.CrimeRepository
-import com.bignerdranch.android.criminalintent.Note
+import com.bignerdranch.android.criminalintent.bean.Note
 import java.util.*
 
 class CrimeDetailViewModel(): ViewModel() {

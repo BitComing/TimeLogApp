@@ -2,7 +2,7 @@ package com.bignerdranch.android.criminalintent.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.bignerdranch.android.criminalintent.Note
+import com.bignerdranch.android.criminalintent.bean.Note
 import java.util.*
 
 @Dao

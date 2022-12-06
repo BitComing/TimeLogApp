@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent
+package com.bignerdranch.android.criminalintent.bean
 
 import android.icu.text.CaseMap
 import androidx.room.Entity
