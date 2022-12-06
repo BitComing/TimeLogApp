@@ -16,7 +16,7 @@
         android:layout_height="60dp">
 
         <Button
-            android:id="@+id/send"
+            android:id="@+id/bt_send"
             android:layout_width="70dp"
             android:layout_height="50dp"
             android:background="@drawable/btn_drawable"
@@ -25,7 +25,7 @@
         </Button>
 
         <EditText
-            android:id="@+id/inputText"
+            android:id="@+id/edit_todo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

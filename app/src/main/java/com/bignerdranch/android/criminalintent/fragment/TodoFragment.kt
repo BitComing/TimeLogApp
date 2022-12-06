@@ -6,18 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.criminalintent.R
 import com.bignerdranch.android.criminalintent.bean.Msg
 import com.bignerdranch.android.criminalintent.bean.Todo
+import com.bignerdranch.android.criminalintent.viewmodel.CrimeListViewModel
+import com.bignerdranch.android.criminalintent.viewmodel.TodoListViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
 class TodoFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    private var todolist: List<Todo> = mutableListOf()
+    private var todolist: List<Todo> = emptyList()
+
+    private lateinit var btSend: Button
+    private lateinit var editTodo: EditText
+
+    private val todoListViewModel by lazy {
+        ViewModelProvider(this).get(TodoListViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +40,9 @@ class TodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view =  inflater.inflate(R.layout.fragment_todo, container, false)
+        btSend = view.findViewById(R.id.bt_send)
+        editTodo = view.findViewById(R.id.edit_todo)
+
         recyclerView = view.findViewById(R.id.recyclerview_todo)
 
         recyclerView.layoutManager = LinearLayoutManager(this.activity)
@@ -36,6 +50,24 @@ class TodoFragment : Fragment() {
         recyclerView.adapter = TodoAdapter(todolist)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btSend.setOnClickListener{
+            val todoContent = editTodo.text.toString()
+            val todo = Todo(UUID.randomUUID(), Date(), todoContent, false)
+            todoListViewModel.addTodo(todo)
+        }
+
+        todoListViewModel.noteListLiveData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { todos ->
+                todos?.let {
+                    recyclerView.adapter = TodoAdapter(it)
+                }
+            }
+        )
     }
 
     private inner class TodoHolder(view: View): RecyclerView.ViewHolder(view) {

@@ -11,7 +11,7 @@ class TodoListViewModel : ViewModel() {
 
     private val crimeRepository = CrimeRepository.get()
     private val crimeLiveData = CrimeRepository.get()
-//    val crimeListLiveData = crimeLiveData.getCrimes()
+    val noteListLiveData = crimeLiveData.getTodos()
 
     fun addTodo(todo : Todo){
         crimeRepository.addTodo(todo)
