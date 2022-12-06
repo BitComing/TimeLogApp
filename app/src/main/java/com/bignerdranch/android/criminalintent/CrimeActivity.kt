@@ -55,6 +55,7 @@ class CrimeActivity : AppCompatActivity() {
     private lateinit var todayDate: Date
     private lateinit var strTodayDate: String
     private  var tmpDuration:Int? = 0
+    private var tmpContent: String? = null
 
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
@@ -86,6 +87,7 @@ class CrimeActivity : AppCompatActivity() {
         val bundle = this.getIntent().getExtras()
         val crimeId : UUID = bundle?.getSerializable(ARG_CRIME_ID) as UUID
         tmpDuration = bundle.getSerializable("duration") as Int?
+        tmpContent = bundle.getSerializable("todo_content") as String?
 
         crimeDetailViewModel.loadCrime(crimeId)
 
@@ -189,6 +191,10 @@ class CrimeActivity : AppCompatActivity() {
         val date = this.note.date
         var hour = note.hour
         var min = note.min
+
+        if (tmpContent != null) {
+            note.title = tmpContent as String
+        }
 
         if (note.duration == 0 && tmpDuration != null) {
             note.duration = tmpDuration!!

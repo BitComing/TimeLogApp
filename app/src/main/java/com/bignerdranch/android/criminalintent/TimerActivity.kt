@@ -18,6 +18,8 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var btStart: Button
     private lateinit var btCreate: Button
 
+    private var tmpContent: String? = null
+
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
     }
@@ -31,6 +33,9 @@ class TimerActivity : AppCompatActivity() {
         btStop = findViewById(R.id.bt_stop_timer)
         btStart = findViewById(R.id.bt_start_timer)
         btCreate = findViewById(R.id.bt_create_note)
+
+        val bundle = this.getIntent().getExtras()
+        tmpContent = bundle?.getSerializable("todo_content") as String?
 
     }
 
@@ -53,6 +58,9 @@ class TimerActivity : AppCompatActivity() {
             val duration = timeShow[0].toInt()
             val intent = Intent(this, CrimeActivity::class.java)
 
+            if (tmpContent != null) {
+                intent.putExtra("todo_content",tmpContent)
+            }
             intent.putExtra(ARG_CRIME_ID,note.id)
             intent.putExtra("duration",duration)
             startActivity(intent)

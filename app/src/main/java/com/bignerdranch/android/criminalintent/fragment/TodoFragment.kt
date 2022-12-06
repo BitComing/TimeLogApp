@@ -81,6 +81,7 @@ class TodoFragment : Fragment() {
             textTodo.text = todo.content
             linearTodo.setOnClickListener{
                 val intent = Intent(this@TodoFragment.context, TimerActivity::class.java)
+                intent.putExtra("todo_content", todo.content)
                 startActivity(intent)
             }
             checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
