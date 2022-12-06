@@ -77,6 +77,7 @@ class TodoFragment : Fragment() {
         private val textTodo = view.findViewById(R.id.text_todo) as TextView
         private val linearTodo = view.findViewById(R.id.linear_todo) as ConstraintLayout
         private val checkBox = view.findViewById<CheckBox>(R.id.checkbox)
+
         fun bind(todo: Todo) {
             textTodo.text = todo.content
             linearTodo.setOnClickListener{
@@ -85,6 +86,33 @@ class TodoFragment : Fragment() {
                     it.putExtra("todo_id",todo.tid.toString())
                     startActivity(it)
                 }
+            }
+            linearTodo.setOnLongClickListener{
+                val popup = PopupMenu(this@TodoFragment.activity, it)
+                popup.menuInflater.inflate(R.menu.popup, popup.menu)
+                popup.setOnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.menu_delete -> {
+                            todoListViewModel.deleteTodo(todo)
+                            Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.menu_copy -> {
+
+                        }
+                        R.id.share -> {
+                            val content = todo.content
+                            Intent(Intent.ACTION_SEND).let {
+                                it.type = "text/plain"
+                                it.putExtra(Intent.EXTRA_TEXT, "$content")
+                                startActivity(Intent.createChooser(it, "$content"))
+                            }
+
+                            Toast.makeText(activity, "分享成功", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    false
+                }
+                true
             }
             checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
