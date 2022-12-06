@@ -10,7 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.bean.Note
-import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
+import com.bignerdranch.android.criminalintent.viewmodel.NoteDetailViewModel
 //import com.bnuz.example.criminalintentRoom.CrimeFragment
 import java.io.File
 import java.text.SimpleDateFormat
@@ -55,8 +55,8 @@ class CrimeActivity : AppCompatActivity() {
     private  var tmpDuration:Int? = 0
     private var tmpContent: String? = null
 
-    private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
-        ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
+    private val noteDetailViewModel : NoteDetailViewModel by lazy {
+        ViewModelProvider(this).get(NoteDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +87,7 @@ class CrimeActivity : AppCompatActivity() {
         tmpDuration = bundle.getSerializable("duration") as Int?
         tmpContent = bundle.getSerializable("todo_content") as String?
 
-        crimeDetailViewModel.loadCrime(crimeId)
+        noteDetailViewModel.loadCrime(crimeId)
 
         note = Note()
 
@@ -126,7 +126,7 @@ class CrimeActivity : AppCompatActivity() {
         txtDur.addTextChangedListener(durationWatcher)
 
         btnDelete.setOnClickListener{
-            crimeDetailViewModel.deleteCrime(note)
+            noteDetailViewModel.deleteCrime(note)
             this.finish()
         }
         btnBack.setOnClickListener{
@@ -172,7 +172,7 @@ class CrimeActivity : AppCompatActivity() {
             dialogTimePicker(hour, min, 1)
         }
 
-        crimeDetailViewModel.noteLiveData.observe(
+        noteDetailViewModel.noteLiveData.observe(
             this,
             androidx.lifecycle.Observer { note1 ->
                 note1?.let {
@@ -284,7 +284,7 @@ class CrimeActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        crimeDetailViewModel.saveCrime(note)
+        noteDetailViewModel.saveCrime(note)
     }
 
 }

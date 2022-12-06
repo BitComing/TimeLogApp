@@ -15,7 +15,7 @@ import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.*
 import com.bignerdranch.android.criminalintent.bean.Note
-import com.bignerdranch.android.criminalintent.viewmodel.CrimeDetailViewModel
+import com.bignerdranch.android.criminalintent.viewmodel.NoteDetailViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -60,15 +60,15 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 //    private lateinit var photoUri: Uri
 
 
-    private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
-        ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
+    private val noteDetailViewModel : NoteDetailViewModel by lazy {
+        ViewModelProvider(this).get(NoteDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         note = Note()
         val crimeId : UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
-        crimeDetailViewModel.loadCrime(crimeId)
+        noteDetailViewModel.loadCrime(crimeId)
     }
 
     override fun onCreateView(
@@ -105,7 +105,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        crimeDetailViewModel.noteLiveData.observe(
+        noteDetailViewModel.noteLiveData.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { crime ->
                 crime?.let {
@@ -161,7 +161,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
             }
         }
         btnDelete.setOnClickListener{
-            crimeDetailViewModel.deleteCrime(note)
+            noteDetailViewModel.deleteCrime(note)
             callbacks?.onCrimeDeleted(this@CrimeFragment)
         }
         addBtnList.setOnClickListener{
@@ -232,7 +232,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     }
     override fun onStop(){
         super.onStop()
-        crimeDetailViewModel.saveCrime(note)
+        noteDetailViewModel.saveCrime(note)
     }
 
     // 重写接口方法
@@ -273,7 +273,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
                     it.moveToFirst()
                     val suspect = it.getString(0)
                     note.suspect = suspect
-                    crimeDetailViewModel.saveCrime(note)
+                    noteDetailViewModel.saveCrime(note)
 //                    suspectButton.text = suspect
                 }
             }
