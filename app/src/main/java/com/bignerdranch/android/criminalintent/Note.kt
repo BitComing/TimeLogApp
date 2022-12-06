@@ -7,6 +7,7 @@ import java.util.*
 import kotlin.time.Duration.Companion.hours
 
 @Entity(tableName = "CRIME")
+
 data class Note (@PrimaryKey
                  val id: UUID = UUID.randomUUID(),
                  var title: String = "",
@@ -15,7 +16,9 @@ data class Note (@PrimaryKey
                  var hour: Int = 0,
                  var min: Int = 0,
                  var isSolved: Boolean = false,
-                 var suspect: String = "") {
+                 var suspect: String = "")
+
+{
     val photoFileName get() = "IMG_$id.jpg"
 }
 

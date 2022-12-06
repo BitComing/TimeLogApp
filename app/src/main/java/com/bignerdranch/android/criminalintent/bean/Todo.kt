@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "TODOS")
+
 data class Todo (
     @PrimaryKey
     val tid: UUID = UUID.randomUUID(),
