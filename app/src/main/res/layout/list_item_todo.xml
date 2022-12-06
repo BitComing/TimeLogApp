@@ -17,7 +17,8 @@
         android:text="完成安卓项目"
         android:textSize="25dp"
         android:background="@drawable/border_crime_item"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <CheckBox
         android:id="@+id/checkbox"

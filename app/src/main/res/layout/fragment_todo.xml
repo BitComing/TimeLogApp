@@ -10,21 +10,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/recyclerview_todo"
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#ffffff"
+        android:background="@drawable/border_crime_item"
         android:layout_weight="1"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_height="60dp">
 
         <Button
             android:id="@+id/bt_send"
             android:layout_width="70dp"
             android:layout_height="50dp"
-            android:background="@drawable/btn_drawable"
+            android:background="@drawable/bt_drawable_test"
             android:text="输入"
             android:textStyle="bold">
         </Button>
