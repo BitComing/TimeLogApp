@@ -34,6 +34,16 @@
                 android:text="时间就是金钱，效率就是生命。"
                 android:textSize="20dp"/>
         </LinearLayout>
+        <TextClock
+            app:layout_constraintTop_toBottomOf="@id/linear_quote"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/text_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:format12Hour="当前时间：MM月dd日HH:mm:ss EEEE" />
 <!--        <RelativeLayout-->
 <!--            android:id="@+id/search_main"-->
 <!--            app:layout_constraintTop_toBottomOf="@id/title_main"-->
@@ -70,7 +80,7 @@
             android:id="@+id/crimeRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/linear_quote"
+            app:layout_constraintTop_toBottomOf="@id/text_clock"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
