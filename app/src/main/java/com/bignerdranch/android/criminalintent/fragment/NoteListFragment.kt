@@ -363,7 +363,7 @@ class CrimeListFragment : Fragment() {
                             }
                         }
 
-//                        rightNotes.sortBy  { T -> (T.hour*60 + T.min) }
+                        rightNotes.sortByDescending  { T -> (T.hour*60 + T.min) }
                         holder.recyclerView.adapter=CrimeAdapter(rightNotes)
                         if (totalTime > 60) {
                             val hour = totalTime/60
