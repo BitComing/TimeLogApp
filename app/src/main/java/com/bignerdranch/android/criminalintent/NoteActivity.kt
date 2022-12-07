@@ -115,8 +115,20 @@ class CrimeActivity : AppCompatActivity() {
                         note.duration = Integer.parseInt(p0.toString())
                         val f1 = SimpleDateFormat("HH:mm")
                         val date = note.date
-                        val startTime = Date(date.time - note.duration * 60 * 1000)
-                        txtStart.setText(f1.format(startTime))
+                        val hour = note.hour
+                        val min = note.min
+                        val startTime = min+hour*60 - note.duration
+                        val startHour = startTime/60
+                        val startMin = startTime % 60
+                        if (startHour<10 && startMin >= 10) {
+                            txtStart.text = "0$startHour:$startMin"
+                        } else if (startHour >= 10 &&startMin<10) {
+                            txtStart.text = "$startHour:0$startMin"
+                        } else if (startHour<10 && startMin<10) {
+                            txtStart.text = "0$startHour:0$startMin"
+                        } else {
+                            txtStart.text = "$startHour:$startMin"
+                        }
                     }
                 }
             }
@@ -198,6 +210,8 @@ class CrimeActivity : AppCompatActivity() {
             note.duration = tmpDuration!!
         }
         if (hour == 0 && min == 0) {
+            note.hour = date.hours
+            note.min = date.minutes
             hour = date.hours
             min = date.minutes
         }
@@ -230,16 +244,6 @@ class CrimeActivity : AppCompatActivity() {
         } else {
             txtEnd.text = "$hour:$min"
         }
-
-
-//        val startTime = Date(date.time - note.duration * 60 * 1000)
-//        txtEnd.text = fTime.format(todayDate)
-//        txtStart.text = fTime.format(startTime)
-
-//        ckbSolved.apply {
-//            isChecked = note.isSolved
-//            jumpDrawablesToCurrentState()
-//        }
     }
     @SuppressLint("NewApi")
     private fun dialogTimePicker(hour: Int, min: Int, flag: Int) {

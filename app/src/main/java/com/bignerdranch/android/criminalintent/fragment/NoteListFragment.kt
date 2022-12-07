@@ -93,6 +93,7 @@ class CrimeListFragment : Fragment() {
             viewLifecycleOwner,
             Observer { dates ->
                 dates?.let {
+//                    dates.sortedBy { T -> T.date }
                     updateDates(dates)
                 }
             }
@@ -179,13 +180,6 @@ class CrimeListFragment : Fragment() {
 //        }
 //    }
 
-
-//    companion object {
-//
-//        fun newInstance(): CrimeListFragment {
-//            return CrimeListFragment()
-//        }
-//    }
 
     // Note的RecyclerView
     private inner class CrimeHolder(view: View):
@@ -368,6 +362,8 @@ class CrimeListFragment : Fragment() {
                                 totalTime+=i.duration
                             }
                         }
+
+//                        rightNotes.sortBy  { T -> (T.hour*60 + T.min) }
                         holder.recyclerView.adapter=CrimeAdapter(rightNotes)
                         if (totalTime > 60) {
                             val hour = totalTime/60
