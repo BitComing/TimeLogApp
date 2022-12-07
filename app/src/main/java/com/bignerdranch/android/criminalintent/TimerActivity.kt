@@ -62,7 +62,7 @@ class TimerActivity : AppCompatActivity() {
             val timeShow = timer.text.toString().split(":")
 //            Log.d(TAG,""+timeShow[0]+" "+timeShow[1])
 
-            val duration = timeShow[0].toInt()
+            val duration = timeShow[0].toInt() + timeShow[1].toInt()*60
             Intent(this, CrimeActivity::class.java).let {
                if (tmpContent != null) {
                    it.putExtra("todo_content",tmpContent)
