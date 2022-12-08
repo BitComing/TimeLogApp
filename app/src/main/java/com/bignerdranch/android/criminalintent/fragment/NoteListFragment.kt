@@ -225,7 +225,7 @@ class CrimeListFragment : Fragment() {
                 txtEndTime.text = "0$hour:$min"
             } else if (hour>=10 && min<10) {
                 txtEndTime.text = "$hour:0$min"
-            } else if (hour<10 && startMin<10) {
+            } else if (hour<10 && min<10) {
                 txtEndTime.text = "0$hour:0$min"
             } else {
                 txtEndTime.text = "$hour:$min"
