@@ -182,7 +182,7 @@ class CrimeListFragment : Fragment() {
 
 
     // Note的RecyclerView
-    private inner class CrimeHolder(view: View):
+    private inner class NoteHolder(view: View):
         RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
         private lateinit var note: Note
@@ -306,15 +306,15 @@ class CrimeListFragment : Fragment() {
 
 
 
-    private inner class CrimeAdapter(var notes: List<Note>) :
-        RecyclerView.Adapter<CrimeHolder>(){
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : CrimeHolder {
+    private inner class NoteAdapter(var notes: List<Note>) :
+        RecyclerView.Adapter<NoteHolder>(){
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : NoteHolder {
             val view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
-            return CrimeHolder(view)
+            return NoteHolder(view)
         }
         override fun getItemCount() = notes.size
 
-        override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
+        override fun onBindViewHolder(holder: NoteHolder, position: Int) {
             val crime = notes[position]
             holder.bind(crime)
         }
@@ -347,7 +347,7 @@ class CrimeListFragment : Fragment() {
             }
 
             holder.recyclerView.layoutManager= LinearLayoutManager(context)
-            holder.recyclerView.adapter=CrimeAdapter(notes)
+            holder.recyclerView.adapter=NoteAdapter(notes)
             crimeListViewModel.crimeListLiveData.observe(
                 viewLifecycleOwner,
                 Observer { notes ->
@@ -364,7 +364,7 @@ class CrimeListFragment : Fragment() {
                         }
 
                         rightNotes.sortByDescending  { T -> (T.hour*60 + T.min) }
-                        holder.recyclerView.adapter=CrimeAdapter(rightNotes)
+                        holder.recyclerView.adapter=NoteAdapter(rightNotes)
                         if (totalTime > 60) {
                             val hour = totalTime/60
                             val min = totalTime%60
