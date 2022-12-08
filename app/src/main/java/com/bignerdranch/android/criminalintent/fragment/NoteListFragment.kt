@@ -25,16 +25,8 @@ class CrimeListFragment : Fragment() {
         fun onCrimeSelected(crimeId: UUID)
     }
     private var callbacks: Callbacks? = null
-
-//    private lateinit var crimeRecyclerView: RecyclerView
-//    private var adapter: CrimeAdapter? = CrimeAdapter(emptyList())
     private lateinit var dayNoteRecyclerView: RecyclerView
     private var dayNoteAdapter: DayNoteAdapter? = DayNoteAdapter(emptyList())
-
-//    private lateinit var crimeList: LiveData<List<Crime>>
-//    private lateinit var dateList : LiveData<List<Date>>
-
-//    private lateinit var editSearch: EditText
     private lateinit var btnFloat : FloatingActionButton
     private lateinit var linearQuote: LinearLayout
 
@@ -42,7 +34,6 @@ class CrimeListFragment : Fragment() {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
     }
 
-    // fragment和activity相关联
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
@@ -50,7 +41,6 @@ class CrimeListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setHasOptionsMenu(true)
 
     }
 
@@ -60,11 +50,6 @@ class CrimeListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_crime_list, container, false)
-
-//        crimeRecyclerView = view.findViewById(R.id.crimeRecyclerView) as RecyclerView
-//        crimeRecyclerView.layoutManager = LinearLayoutManager(context)
-//        crimeRecyclerView.adapter=adapter
-
 //        editSearch = view.findViewById(R.id.search_main)
 
         dayNoteRecyclerView = view.findViewById(R.id.crimeRecyclerView)
@@ -80,20 +65,11 @@ class CrimeListFragment : Fragment() {
     // 视图完成创建时，进行订阅监视
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        // 待用
-//        crimeListViewModel.crimeListLiveData.observe(
-//            viewLifecycleOwner,
-//            Observer { crimes ->
-//                crimes?.let {
-//                    updateUI(crimes)
-//                }
-//            }
-//        )
+
         crimeListViewModel.getAllDates().observe(
             viewLifecycleOwner,
             Observer { dates ->
                 dates?.let {
-//                    dates.sortedBy { T -> T.date }
                     updateDates(dates)
                 }
             }
@@ -104,8 +80,6 @@ class CrimeListFragment : Fragment() {
             val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
             intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
-//            callbacks?.onCrimeSelected(crime.id)
-//            true
         }
         btnFloat.setOnLongClickListener{
             val intent = Intent(this.activity, TimerActivity::class.java)
@@ -128,11 +102,6 @@ class CrimeListFragment : Fragment() {
         dayNoteAdapter = DayNoteAdapter(goodDates.distinct())
         dayNoteRecyclerView.adapter = dayNoteAdapter
     }
-//    private fun updateUI(crimes: List<Crime>) {
-//        adapter = CrimeAdapter(crimes)
-//        crimeRecyclerView.adapter = adapter
-//    }
-
 
     override fun onDetach() {
         super.onDetach()
@@ -166,18 +135,6 @@ class CrimeListFragment : Fragment() {
 //                return true
 //            }
 //        })
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when(item.itemId){
-//            R.id.new_crime->{
-//                val crime = Crime()
-//                crimeListViewModel.addCrime(crime)
-//                callbacks?.onCrimeSelected(crime.id)
-//                true
-//            }
-//            else -> return super.onOptionsItemSelected(item)
-//        }
 //    }
 
 
@@ -232,7 +189,6 @@ class CrimeListFragment : Fragment() {
             }
         }
         override fun onClick(v: View) {
-//            callbacks?.onCrimeSelected(crime.id)
             val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
             intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
@@ -247,11 +203,6 @@ class CrimeListFragment : Fragment() {
                         Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show()
                     }
                     R.id.menu_copy -> {
-
-                        //clipData中的this就是需要复制的文本
-//                        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//                        val clipData = ClipData.newPlainText("", "Hello")
-//                        cm.setPrimaryClip(clipData)
                         Toast.makeText(activity, "复制成功", Toast.LENGTH_SHORT).show()
                     }
                     R.id.share -> {
@@ -320,10 +271,9 @@ class CrimeListFragment : Fragment() {
         }
     }
 
-    // DayNote的RecyclerView
+
     private inner class DayNoteHolder(view: View):RecyclerView.ViewHolder(view) {
         val textDay: TextView = itemView.findViewById(R.id.text_day)
-//        val textFold: TextView = itemView.findViewById(R.id.txt_fold)
         val linearDay: LinearLayout = itemView.findViewById(R.id.linear_day)
         val txtTotalTime: TextView = itemView.findViewById(R.id.txt_total_time)
         var recyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view_day)
@@ -345,14 +295,12 @@ class CrimeListFragment : Fragment() {
                     else -> holder.recyclerView.visibility=View.VISIBLE
                 }
             }
-
             holder.recyclerView.layoutManager= LinearLayoutManager(context)
             holder.recyclerView.adapter=NoteAdapter(notes)
             crimeListViewModel.crimeListLiveData.observe(
                 viewLifecycleOwner,
                 Observer { notes ->
                     notes?.let {
-                        // 可优化成数据库搜索
                         var totalTime = 0
                         val f1 = SimpleDateFormat("yyyy-MM-dd")
                         val rightNotes : MutableList<Note> = ArrayList()
@@ -362,7 +310,6 @@ class CrimeListFragment : Fragment() {
                                 totalTime+=i.duration
                             }
                         }
-
                         rightNotes.sortByDescending  { T -> (T.hour*60 + T.min) }
                         holder.recyclerView.adapter=NoteAdapter(rightNotes)
                         if (totalTime > 60) {

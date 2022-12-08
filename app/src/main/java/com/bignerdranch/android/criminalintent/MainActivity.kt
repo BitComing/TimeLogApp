@@ -60,14 +60,12 @@ class MainActivity : AppCompatActivity(),
 
         // ViewPager 滑动事件监听,BottomNavigationView跟随滑动切换
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-
             override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
 
             // 将滑动到的页面对应的 menu 设置为选中状态
             override fun onPageSelected(i: Int) {
                 bnView.menu.getItem(i).isChecked = true
             }
-
             override fun onPageScrollStateChanged(i: Int) {}
         })
     }
@@ -81,7 +79,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onCrimeDeleted(crimeFragment: CrimeFragment) {
-//        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .remove(crimeFragment)
             .commit()
