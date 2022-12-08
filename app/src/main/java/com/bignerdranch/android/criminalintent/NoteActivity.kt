@@ -16,7 +16,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val TAG = "CrimeActivity"
+private const val TAG = "NoteActivity"
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0

@@ -3,12 +3,11 @@ package com.bignerdranch.android.criminalintent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Chronometer
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.criminalintent.bean.Note
-import com.bignerdranch.android.criminalintent.viewmodel.CrimeListViewModel
+import com.bignerdranch.android.criminalintent.viewmodel.NoteListViewModel
 import com.bignerdranch.android.criminalintent.viewmodel.TodoListViewModel
 
 private const val ARG_CRIME_ID = "crime_id"
@@ -23,8 +22,8 @@ class TimerActivity : AppCompatActivity() {
     private var tmpContent: String? = null
     private var tmpId: String? = null
 
-    private val crimeListViewModel: CrimeListViewModel by lazy {
-        ViewModelProvider(this).get(CrimeListViewModel::class.java)
+    private val noteListViewModel: NoteListViewModel by lazy {
+        ViewModelProvider(this).get(NoteListViewModel::class.java)
     }
     private val todoListViewModel: TodoListViewModel by lazy {
         ViewModelProvider(this).get(TodoListViewModel::class.java)
@@ -56,7 +55,7 @@ class TimerActivity : AppCompatActivity() {
         }
         btCreate.setOnClickListener{
             val note = Note()
-            crimeListViewModel.addCrime(note)
+            noteListViewModel.addCrime(note)
 
             tmpId?.let { it1 -> todoListViewModel.deleteTodoId(it1) }
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.criminalintent.*
 import com.bignerdranch.android.criminalintent.bean.Note
-import com.bignerdranch.android.criminalintent.viewmodel.CrimeListViewModel
+import com.bignerdranch.android.criminalintent.viewmodel.NoteListViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,8 +30,8 @@ class CrimeListFragment : Fragment() {
     private lateinit var btnFloat : FloatingActionButton
     private lateinit var linearQuote: LinearLayout
 
-    private val crimeListViewModel: CrimeListViewModel by lazy {
-        ViewModelProvider(this).get(CrimeListViewModel::class.java)
+    private val noteListViewModel: NoteListViewModel by lazy {
+        ViewModelProvider(this).get(NoteListViewModel::class.java)
     }
 
     override fun onAttach(context: Context) {
@@ -66,7 +66,7 @@ class CrimeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        crimeListViewModel.getAllDates().observe(
+        noteListViewModel.getAllDates().observe(
             viewLifecycleOwner,
             Observer { dates ->
                 dates?.let {
@@ -76,7 +76,7 @@ class CrimeListFragment : Fragment() {
         )
         btnFloat.setOnClickListener{
             val note = Note()
-            crimeListViewModel.addCrime(note)
+            noteListViewModel.addCrime(note)
             val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
             intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
@@ -199,7 +199,7 @@ class CrimeListFragment : Fragment() {
             popup.setOnMenuItemClickListener {
                 when(it.itemId) {
                     R.id.menu_delete -> {
-                        crimeListViewModel.deleteNote(note)
+                        noteListViewModel.deleteNote(note)
                         Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show()
                     }
                     R.id.menu_copy -> {
@@ -297,7 +297,7 @@ class CrimeListFragment : Fragment() {
             }
             holder.recyclerView.layoutManager= LinearLayoutManager(context)
             holder.recyclerView.adapter=NoteAdapter(notes)
-            crimeListViewModel.crimeListLiveData.observe(
+            noteListViewModel.crimeListLiveData.observe(
                 viewLifecycleOwner,
                 Observer { notes ->
                     notes?.let {

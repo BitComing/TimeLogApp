@@ -6,7 +6,7 @@ import com.bignerdranch.android.criminalintent.CrimeRepository
 import com.bignerdranch.android.criminalintent.bean.Note
 import java.util.*
 
-class CrimeListViewModel : ViewModel() {
+class NoteListViewModel : ViewModel() {
 
     private val crimeRepository = CrimeRepository.get()
     private val crimeLiveData = CrimeRepository.get()
