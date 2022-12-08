@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bignerdranch.android.criminalintent">
+    package="com.bignerdranch.android.timelog">
 
     <application
-        android:name=".TimeLogApplication"
+        android:name="com.bignerdranch.android.timelog.TimeLogApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,16 +15,16 @@
         android:theme="@style/Theme.CriminalIntent"
         tools:targetApi="31">
         <activity
-            android:name=".TimerActivity"
+            android:name="com.bignerdranch.android.timelog.TimerActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingActivity"
+            android:name="com.bignerdranch.android.timelog.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".CrimeActivity"
+            android:name="com.bignerdranch.android.timelog.CrimeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.bignerdranch.android.timelog.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.bignerdranch.android.criminalintent.fileprovider"
+            android:authorities="com.bignerdranch.android.timelog.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

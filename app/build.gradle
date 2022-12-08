@@ -8,7 +8,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.bignerdranch.android.criminalintent"
+        applicationId "com.bignerdranch.android.timelog"
         minSdk 21
         targetSdk 32
         versionCode 1
