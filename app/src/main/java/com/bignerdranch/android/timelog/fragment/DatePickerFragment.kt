@@ -1,4 +1,4 @@
-package com.bignerdranch.android.timelog
+package com.bignerdranch.android.timelog.fragment
 
 import android.app.DatePickerDialog
 import android.app.Dialog
