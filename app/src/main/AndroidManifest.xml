@@ -21,7 +21,7 @@
             android:name="com.bignerdranch.android.timelog.SettingActivity"
             android:exported="false" />
         <activity
-            android:name="com.bignerdranch.android.timelog.CrimeActivity"
+            android:name="com.bignerdranch.android.timelog.NoteActivity"
             android:exported="false" />
         <activity
             android:name="com.bignerdranch.android.timelog.MainActivity"

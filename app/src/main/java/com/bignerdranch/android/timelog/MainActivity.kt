@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.bignerdranch.android.timelog.adapter.FragmentAdapter
-import com.bignerdranch.android.timelog.fragment.CrimeFragment
+import com.bignerdranch.android.timelog.fragment.NoteFragment
 import com.bignerdranch.android.timelog.fragment.CrimeListFragment
 import com.bignerdranch.android.timelog.fragment.TodoFragment
 import com.bignerdranch.android.timelog.fragment.SettingFragment
@@ -15,7 +15,7 @@ import java.util.*
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(),
-    CrimeListFragment.Callbacks, CrimeFragment.Callbacks{
+    CrimeListFragment.Callbacks, NoteFragment.Callbacks{
 
     private lateinit var bnView: BottomNavigationView
     private lateinit var viewPager: ViewPager
@@ -71,16 +71,16 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onCrimeSelected(crimeId: UUID) {
-        val fragment = CrimeFragment.newInstance(crimeId)
+        val fragment = NoteFragment.newInstance(crimeId)
         supportFragmentManager.beginTransaction()
             .replace(R.id.view_pager, fragment)
             .addToBackStack(null)
             .commit()
     }
 
-    override fun onCrimeDeleted(crimeFragment: CrimeFragment) {
+    override fun onCrimeDeleted(noteFragment: NoteFragment) {
         supportFragmentManager.beginTransaction()
-            .remove(crimeFragment)
+            .remove(noteFragment)
             .commit()
     }
 

@@ -4,18 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.bignerdranch.android.timelog.CrimeRepository
+import com.bignerdranch.android.timelog.NoteRepository
 import com.bignerdranch.android.timelog.bean.Note
 import java.util.*
 
 class NoteDetailViewModel(): ViewModel() {
-    private val crimeRepository = CrimeRepository.get()
+    private val noteRepository = NoteRepository.get()
     private val crimeIdLiveData = MutableLiveData<UUID>()
 
 
     var noteLiveData: LiveData<Note?> =
         Transformations.switchMap(crimeIdLiveData) {
-            crimeId -> crimeRepository.getCrime(crimeId)
+            crimeId -> noteRepository.getCrime(crimeId)
         }
 
     fun loadCrime(crimeId: UUID) {
@@ -23,10 +23,10 @@ class NoteDetailViewModel(): ViewModel() {
     }
 
     fun saveCrime(note: Note) {
-        crimeRepository.updateCrime(note)
+        noteRepository.updateCrime(note)
     }
     fun deleteCrime(note: Note) {
-        crimeRepository.deleteCrime(note)
+        noteRepository.deleteCrime(note)
     }
 
 //    fun getPhotoFile(crime: Crime): File {

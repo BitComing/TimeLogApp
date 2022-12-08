@@ -2,27 +2,27 @@ package com.bignerdranch.android.timelog.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.bignerdranch.android.timelog.CrimeRepository
+import com.bignerdranch.android.timelog.NoteRepository
 import com.bignerdranch.android.timelog.bean.Note
 import java.util.*
 
 class NoteListViewModel : ViewModel() {
 
-    private val crimeRepository = CrimeRepository.get()
-    private val crimeLiveData = CrimeRepository.get()
+    private val noteRepository = NoteRepository.get()
+    private val crimeLiveData = NoteRepository.get()
     val crimeListLiveData = crimeLiveData.getCrimes()
 
     fun addCrime(note : Note){
-        crimeRepository.addCrime(note)
+        noteRepository.addCrime(note)
     }
     fun deleteNote(note : Note) {
-        crimeRepository.deleteCrime(note)
+        noteRepository.deleteCrime(note)
     }
 
     fun findCrime(str: String) : LiveData<List<Note>> {
-        return crimeRepository.findCrime(str)
+        return noteRepository.findCrime(str)
     }
     fun getAllDates() : LiveData<List<Date>> {
-        return crimeRepository.getAllDates()
+        return noteRepository.getAllDates()
     }
 }

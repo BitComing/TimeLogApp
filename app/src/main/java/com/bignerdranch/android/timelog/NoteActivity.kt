@@ -19,7 +19,7 @@ private const val TAG = "NoteActivity"
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
-class CrimeActivity : AppCompatActivity() {
+class NoteActivity : AppCompatActivity() {
 
 //    interface Callbacks {
 //        fun onCrimeDeleted(fragment: CrimeFragment)

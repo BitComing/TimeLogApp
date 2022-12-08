@@ -77,7 +77,7 @@ class CrimeListFragment : Fragment() {
         btnFloat.setOnClickListener{
             val note = Note()
             noteListViewModel.addCrime(note)
-            val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
+            val intent = Intent(this@CrimeListFragment.activity, NoteActivity::class.java)
             intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
         }
@@ -189,7 +189,7 @@ class CrimeListFragment : Fragment() {
             }
         }
         override fun onClick(v: View) {
-            val intent = Intent(this@CrimeListFragment.activity, CrimeActivity::class.java)
+            val intent = Intent(this@CrimeListFragment.activity, NoteActivity::class.java)
             intent.putExtra(ARG_CRIME_ID,note.id)
             startActivity(intent)
         }

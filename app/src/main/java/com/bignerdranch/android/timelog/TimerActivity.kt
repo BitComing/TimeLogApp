@@ -69,7 +69,7 @@ class TimerActivity : AppCompatActivity() {
 //            Log.d(TAG,""+timeShow[0]+" "+timeShow[1])
 
 
-            Intent(this, CrimeActivity::class.java).let {
+            Intent(this, NoteActivity::class.java).let {
                if (tmpContent != null) {
                    it.putExtra("todo_content",tmpContent)
                }

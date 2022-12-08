@@ -11,8 +11,8 @@ import java.util.*
 import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "crime-database"
-//通过上下文创建一个类？
-class CrimeRepository private constructor(context: Context){
+
+class NoteRepository private constructor(context: Context){
     private val database : CrimeDatabase = Room.databaseBuilder(
         context.applicationContext,
         CrimeDatabase::class.java,
@@ -73,14 +73,14 @@ class CrimeRepository private constructor(context: Context){
 //    fun getPhotoFile(crime: Crime): File = File(filesDir, crime.photoFileName)
 
     companion object {
-        private var INSTANCE: CrimeRepository?=null
+        private var INSTANCE: NoteRepository?=null
         fun initialize(context: Context) {
             if(INSTANCE == null) {
                 // 构造CrimeRepository的方法
-                INSTANCE = CrimeRepository(context)
+                INSTANCE = NoteRepository(context)
             }
         }
-        fun get(): CrimeRepository {
+        fun get(): NoteRepository {
             return INSTANCE ?:
             throw IllegalStateException("CrimeRepository must be initialized")
         }

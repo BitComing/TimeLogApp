@@ -22,7 +22,7 @@ import java.util.*
 
 
 private const val ARG_CRIME_ID = "crime_id"
-private const val TAG = "CrimeFragment"
+private const val TAG = "NoteFragment"
 
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
@@ -30,10 +30,10 @@ private const val REQUEST_CONTACT = 1
 private const val REQUEST_PHOTO = 2
 private const val DATE_FORMAT = "EEE, MMM, dd"
 
-class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
+class NoteFragment : Fragment() , DatePickerFragment.Callbacks{
 
     interface Callbacks {
-        fun onCrimeDeleted(fragment: CrimeFragment)
+        fun onCrimeDeleted(fragment: NoteFragment)
     }
 
     private var callbacks: Callbacks? = null
@@ -156,13 +156,13 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         }
         btnDate.setOnClickListener {
             DatePickerFragment.newInstance(note.date).apply {
-                setTargetFragment(this@CrimeFragment, REQUEST_DATE)
-                show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
+                setTargetFragment(this@NoteFragment, REQUEST_DATE)
+                show(this@NoteFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
         btnDelete.setOnClickListener{
             noteDetailViewModel.deleteCrime(note)
-            callbacks?.onCrimeDeleted(this@CrimeFragment)
+            callbacks?.onCrimeDeleted(this@NoteFragment)
         }
         addBtnList.setOnClickListener{
             var num = Integer.parseInt(durTxt.text.toString())
@@ -305,11 +305,11 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 //                    putString(ARG_PARAM2, param2)
 //                }
 //            }
-        fun newInstance(crimeId : UUID) :CrimeFragment {
+        fun newInstance(crimeId : UUID) :NoteFragment {
             val args = Bundle().apply{
                 putSerializable(ARG_CRIME_ID,crimeId)
             }
-            return CrimeFragment().apply { arguments = args }
+            return NoteFragment().apply { arguments = args }
         }
     }
 }
