@@ -27,20 +27,16 @@ class CrimeActivity : AppCompatActivity() {
 //    }
 //
 //    private var callbacks: Callbacks? = null
-
+//    private lateinit var photoFile: File
     private lateinit var note : Note
-    private lateinit var photoFile: File
 
     private lateinit var txtDate: TextView
+    private lateinit var txtEnd : TextView
+    private lateinit var txtStart: TextView
 
     private lateinit var edTxtTitle : EditText
     private lateinit var txtDur : EditText
 
-    private lateinit var txtEnd : TextView
-    private lateinit var txtStart: TextView
-
-//    private lateinit var btnDate : Button
-//    private  lateinit var ckbSolved : CheckBox
     private lateinit var btnDelete: Button
     private lateinit var btnBack: Button
     private lateinit var btnAdd15 : Button
@@ -71,8 +67,6 @@ class CrimeActivity : AppCompatActivity() {
         txtEnd = findViewById(R.id.edit_now_time)
         txtStart = findViewById(R.id.edit_start_time)
 
-//        btnDate = findViewById(R.id.crime_date)
-//        ckbSolved = findViewById(R.id.crime_solved)
         btnDelete = findViewById(R.id.btn_delete)
         btnBack = findViewById(R.id.btn_back)
 
@@ -197,7 +191,6 @@ class CrimeActivity : AppCompatActivity() {
     private fun updateUI() {
 
         val formatDate = SimpleDateFormat("yyyy-MM-dd")
-        val fTime = SimpleDateFormat("HH:mm")
         val date = this.note.date
         var hour = note.hour
         var min = note.min

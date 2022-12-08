@@ -12,7 +12,7 @@ import com.bignerdranch.android.criminalintent.bean.Todo
 //通过注解实现了数据的类型转换，类的实现在CrimeTypeConverters上
 @TypeConverters(NoteTypeConverters::class)
 abstract class CrimeDatabase : RoomDatabase(){
-    abstract fun crimeDao(): CrimeDao
+    abstract fun crimeDao(): NoteDao
     abstract fun todoDao(): TodoDao
 }
 

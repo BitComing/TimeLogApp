@@ -6,7 +6,7 @@ import com.bignerdranch.android.criminalintent.bean.Note
 import java.util.*
 
 @Dao
-interface CrimeDao {
+interface NoteDao {
     @Query("SELECT * FROM crime order by date desc")
     fun getCrimes(): LiveData<List<Note>>
 
