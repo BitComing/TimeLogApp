@@ -3,6 +3,7 @@ package com.bignerdranch.android.criminalintent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Chronometer
 import androidx.lifecycle.ViewModelProvider
@@ -60,9 +61,15 @@ class TimerActivity : AppCompatActivity() {
             tmpId?.let { it1 -> todoListViewModel.deleteTodoId(it1) }
 
             val timeShow = timer.text.toString().split(":")
+            var duration = 0
+            when(timeShow.size) {
+                1 -> duration = 0;
+                2-> duration = timeShow[0].toInt()
+                3-> duration = timeShow[0].toInt()*60 + timeShow[1].toInt()
+            }
 //            Log.d(TAG,""+timeShow[0]+" "+timeShow[1])
 
-            val duration = timeShow[0].toInt() + timeShow[1].toInt()*60
+
             Intent(this, CrimeActivity::class.java).let {
                if (tmpContent != null) {
                    it.putExtra("todo_content",tmpContent)
