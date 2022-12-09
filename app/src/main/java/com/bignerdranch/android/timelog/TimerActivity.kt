@@ -56,7 +56,6 @@ class TimerActivity : AppCompatActivity() {
         btCreate.setOnClickListener{
             val note = Note()
             noteListViewModel.addCrime(note)
-
             tmpId?.let { it1 -> todoListViewModel.deleteTodoId(it1) }
 
             val timeShow = timer.text.toString().split(":")
@@ -66,9 +65,6 @@ class TimerActivity : AppCompatActivity() {
                 2-> duration = timeShow[0].toInt()
                 3-> duration = timeShow[0].toInt()*60 + timeShow[1].toInt()
             }
-//            Log.d(TAG,""+timeShow[0]+" "+timeShow[1])
-
-
             Intent(this, NoteActivity::class.java).let {
                if (tmpContent != null) {
                    it.putExtra("todo_content",tmpContent)

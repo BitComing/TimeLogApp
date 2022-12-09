@@ -16,7 +16,11 @@
         tools:targetApi="31">
         <activity
             android:name="com.bignerdranch.android.timelog.TimerActivity"
-            android:exported="false" />
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.bignerdranch.android.timelog.SettingActivity"
             android:exported="false" />
@@ -31,6 +35,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts"/>
         </activity>
 
         <provider

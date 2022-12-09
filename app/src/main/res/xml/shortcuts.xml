@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:icon="@drawable/icon_launch"
+        android:shortcutId="timer"
+        android:shortcutLongLabel="@string/static_long_label"
+        android:shortcutShortLabel="@string/static_short_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.bignerdranch.android.timelog.TimerActivity"
+            android:targetPackage="com.bignerdranch.android.timelog" />
+    </shortcut>
+</shortcuts>
+
