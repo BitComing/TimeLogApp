@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.bignerdranch.android.timelog.adapter.FragmentAdapter
-import com.bignerdranch.android.timelog.fragment.NoteFragment
 import com.bignerdranch.android.timelog.fragment.CrimeListFragment
 import com.bignerdranch.android.timelog.fragment.TodoFragment
 import com.bignerdranch.android.timelog.fragment.SettingFragment
@@ -14,8 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 private const val TAG = "MainActivity"
-class MainActivity : AppCompatActivity(),
-    CrimeListFragment.Callbacks, NoteFragment.Callbacks{
+class MainActivity : AppCompatActivity(){
 
     private lateinit var bnView: BottomNavigationView
     private lateinit var viewPager: ViewPager
@@ -48,7 +46,6 @@ class MainActivity : AppCompatActivity(),
     override fun onStart() {
         super.onStart()
 
-        // 导航栏的控制
         bnView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.tab_one -> viewPager.currentItem = 0
@@ -70,18 +67,18 @@ class MainActivity : AppCompatActivity(),
         })
     }
 
-    override fun onCrimeSelected(crimeId: UUID) {
-        val fragment = NoteFragment.newInstance(crimeId)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.view_pager, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
+//    override fun onCrimeSelected(crimeId: UUID) {
+//        val fragment = NoteFragment.newInstance(crimeId)
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.view_pager, fragment)
+//            .addToBackStack(null)
+//            .commit()
+//    }
 
-    override fun onCrimeDeleted(noteFragment: NoteFragment) {
-        supportFragmentManager.beginTransaction()
-            .remove(noteFragment)
-            .commit()
-    }
+//    override fun onNoteDeleted(noteFragment: NoteFragment) {
+//        supportFragmentManager.beginTransaction()
+//            .remove(noteFragment)
+//            .commit()
+//    }
 
 }

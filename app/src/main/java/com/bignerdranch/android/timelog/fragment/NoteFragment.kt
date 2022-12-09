@@ -33,7 +33,7 @@ private const val DATE_FORMAT = "EEE, MMM, dd"
 class NoteFragment : Fragment() , DatePickerFragment.Callbacks{
 
     interface Callbacks {
-        fun onCrimeDeleted(fragment: NoteFragment)
+        fun onNoteDeleted(fragment: NoteFragment)
     }
 
     private var callbacks: Callbacks? = null
@@ -162,7 +162,7 @@ class NoteFragment : Fragment() , DatePickerFragment.Callbacks{
         }
         btnDelete.setOnClickListener{
             noteDetailViewModel.deleteCrime(note)
-            callbacks?.onCrimeDeleted(this@NoteFragment)
+            callbacks?.onNoteDeleted(this@NoteFragment)
         }
         addBtnList.setOnClickListener{
             var num = Integer.parseInt(durTxt.text.toString())

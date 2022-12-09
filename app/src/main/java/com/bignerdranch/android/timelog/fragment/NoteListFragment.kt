@@ -21,10 +21,10 @@ private const val ARG_CRIME_ID = "crime_id"
 private  const val TAG = "CrimeListFragment"
 class CrimeListFragment : Fragment() {
 
-    interface Callbacks {
-        fun onCrimeSelected(crimeId: UUID)
-    }
-    private var callbacks: Callbacks? = null
+//    interface Callbacks {
+//        fun onCrimeSelected(crimeId: UUID)
+//    }
+//    private var callbacks: Callbacks? = null
     private lateinit var dayNoteRecyclerView: RecyclerView
     private var dayNoteAdapter: DayNoteAdapter? = DayNoteAdapter(emptyList())
     private lateinit var btnFloat : FloatingActionButton
@@ -36,7 +36,7 @@ class CrimeListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callbacks = context as Callbacks?
+//        callbacks = context as Callbacks?
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,7 +105,7 @@ class CrimeListFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        callbacks = null
+//        callbacks = null
     }
 
 
