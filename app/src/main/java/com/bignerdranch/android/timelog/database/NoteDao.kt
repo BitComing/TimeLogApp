@@ -20,13 +20,13 @@ interface NoteDao {
     fun findCrime(str: String): LiveData<List<Note>>
 
     @Update
-    fun updateCrime(note: Note)
+    fun updateNote(note: Note)
 
     @Insert
-    fun addCrime(note: Note)
+    fun addNote(note: Note)
 
     @Delete
-    fun deleteCrime(note: Note)
+    fun deleteNote(note: Note)
 
 //    @Query("SELECT DISTINCT date FROM crime order by date desc")
 //    fun getAllDates(): LiveData<List<Date>>

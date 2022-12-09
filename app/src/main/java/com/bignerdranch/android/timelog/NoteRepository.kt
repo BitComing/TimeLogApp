@@ -13,9 +13,9 @@ import java.util.concurrent.Executors
 private const val DATABASE_NAME = "crime-database"
 
 class NoteRepository private constructor(context: Context){
-    private val database : CrimeDatabase = Room.databaseBuilder(
+    private val database : NoteDatabase = Room.databaseBuilder(
         context.applicationContext,
-        CrimeDatabase::class.java,
+        NoteDatabase::class.java,
         DATABASE_NAME
     ).addMigrations(migration_1_2)
         .addMigrations(migration_2_3)
@@ -23,7 +23,7 @@ class NoteRepository private constructor(context: Context){
         .addMigrations(migration_4_5)
         .build()
 
-    private val crimeDao = database.crimeDao()
+    private val crimeDao = database.noteDao()
     private val todoDao = database.todoDao()
 
     private val executor = Executors.newSingleThreadExecutor()
@@ -36,17 +36,17 @@ class NoteRepository private constructor(context: Context){
     fun getAllDates() : LiveData<List<Date>> = crimeDao.getAllDates()
     fun updateCrime(note: Note) {
         executor.execute {
-            crimeDao.updateCrime(note)
+            crimeDao.updateNote(note)
         }
     }
     fun addCrime(note: Note) {
         executor.execute {
-            crimeDao.addCrime(note)
+            crimeDao.addNote(note)
         }
     }
     fun deleteCrime(note: Note) {
         executor.execute {
-            crimeDao.deleteCrime(note)
+            crimeDao.deleteNote(note)
         }
     }
 

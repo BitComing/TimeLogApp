@@ -11,8 +11,8 @@ import com.bignerdranch.android.timelog.bean.Todo
 @Database(entities = [Note::class, Todo::class], version = 5)
 //通过注解实现了数据的类型转换，类的实现在CrimeTypeConverters上
 @TypeConverters(NoteTypeConverters::class)
-abstract class CrimeDatabase : RoomDatabase(){
-    abstract fun crimeDao(): NoteDao
+abstract class NoteDatabase : RoomDatabase(){
+    abstract fun noteDao(): NoteDao
     abstract fun todoDao(): TodoDao
 }
 
