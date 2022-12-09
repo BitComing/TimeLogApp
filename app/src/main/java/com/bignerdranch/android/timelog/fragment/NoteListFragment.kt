@@ -49,7 +49,7 @@ class CrimeListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_crime_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_note_list, container, false)
 //        editSearch = view.findViewById(R.id.search_main)
 
         dayNoteRecyclerView = view.findViewById(R.id.crimeRecyclerView)
@@ -112,7 +112,7 @@ class CrimeListFragment : Fragment() {
 //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 //        super.onCreateOptionsMenu(menu, inflater)
 //
-//        inflater.inflate(R.menu.fragment_crime_list, menu)
+//        inflater.inflate(R.menu.fragment_note_list, menu)
 //        val searchView = menu.findItem(R.id.app_bar_search).actionView as SearchView
 //        searchView.maxWidth = 900
 //
