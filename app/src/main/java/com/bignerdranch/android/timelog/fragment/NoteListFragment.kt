@@ -260,7 +260,7 @@ class CrimeListFragment : Fragment() {
     private inner class NoteAdapter(var notes: List<Note>) :
         RecyclerView.Adapter<NoteHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : NoteHolder {
-            val view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
+            val view = layoutInflater.inflate(R.layout.list_item_note, parent, false)
             return NoteHolder(view)
         }
         override fun getItemCount() = notes.size
